@@ -1,20 +1,9 @@
-<div style="height:10px;width:100%"></div>
-<div class="pull-left">
-  <div class="tax">
-        <div class="name" >
-            <div class="infoCommonName" ng-show="species.common">
-                {{species.common | capitalize}}
-            </div>
-            <div class="infoSciName" ng-show="species.scientificname">
-                {{species.scientificname | capitalize}}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="pull-right" ng-include="'static/views/overview/map.html'"></div>
-<mol-species-images
-  size="150" scientificname="species.scientificname"></mol-species-images>
-<div style="clear:left">
-  <mol-species-description
-  scientificname="species.scientificname"></mol-species-description>
-</div>
+<table class="table">
+  <tbody>
+    <tr ng-repeat="dataset in datasets | filter:({dataset_id:dataset_id)}">
+      <td ng-repeat="column in dataset">
+          {{column}}
+      </td>
+    </tr>
+  </tbody>
+</table>

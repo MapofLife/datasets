@@ -15,7 +15,6 @@ angular.module('mol', [
   'mol.loading-indicator',
   'ui.bootstrap',
   'ui.router',
-  'ui.checkbox',
   'percentage',
   'km2',
   'angular-loading-bar',

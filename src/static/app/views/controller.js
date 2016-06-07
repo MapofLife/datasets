@@ -11,9 +11,10 @@ angular.module('mol.controllers')
       $scope.datasets = [];
 
       molApi({
-          "service" : "datasets"
+          "service" : "datasets/list",
+          "loading" : true
       }).then(function(result) {
-          $scope.datasets = result.data;
+          $scope.datasets = result.data[0].datasets;
       })
 
 
