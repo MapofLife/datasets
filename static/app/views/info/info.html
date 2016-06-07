@@ -1,0 +1,9 @@
+<table class="table">
+  <tbody>
+    <tr ng-repeat="dataset in datasets | filter:({dataset_id:dataset_id)}">
+      <td ng-repeat="column in dataset">
+          {{column}}
+      </td>
+    </tr>
+  </tbody>
+</table>
