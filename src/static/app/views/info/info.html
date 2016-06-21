@@ -1,9 +1,32 @@
-<table class="table">
-  <tbody>
-    <tr ng-repeat="dataset in datasets | filter:({dataset_id:dataset_id)}">
-      <td ng-repeat="column in dataset">
-          {{column}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+<div class="notification_widget" ng-if="loading" class="animate-if">
+    <div class="notification_content">
+        <div class="empty_icon"><i class="fa fa-spinner fa-pulse fa-3xx" aria-hidden="true"></i></div>
+        <div class="notification_title">Loading dataset</div>
+    </div>
+</div>
+
+<div ng-if="!loading" class="animate-if" ng-cloak>
+    <h3>{{ dsinfo.dataset_title }}</h3>
+
+    <div>
+        <p>
+            <strong>Author:</strong>
+            {{ dsinfo.authordisplay }}</p>
+        <p>
+            <strong>Taxonomic groups:</strong>
+            {{ dsinfo.taxogroup }}</p>
+        <p ng-show="dsinfo.url">Source:
+            <a href="{{ dsinfo.url }}">{{ dsinfo.url }}</a>
+        </p>
+    </div>
+
+    <div class="dataset-section" ng-repeat="md in dsinfo.metadata">
+        <hr class="featurette-divider">
+        <h4>{{ md.section }}</h4>
+        <div ng-repeat="mdc in md.children">
+            <h5>{{ mdc.label }}</h5>
+            <p>{{ mdc.value }}</p>
+        </div>
+    </div>
+</div>

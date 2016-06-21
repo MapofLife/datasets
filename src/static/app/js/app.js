@@ -79,7 +79,7 @@ angular.module('mol', [
             controller: 'molDatasetsInfoCtrl'
           }
         },
-        url: '/{0}'.format(params)
+        url: '/info/{0}'.format(params)
       }
     );
     //Gets rid of the # in the querystring. Wont work on IE
