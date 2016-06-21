@@ -3,9 +3,9 @@ angular.module('mol.controllers')
         function($scope, $rootScope, $state, molApi) {
             $scope.loading = true;
             $scope.dsinfo = {};
-            dsparams = {
+            var dsparams = {
                 'dataset_id': $state.params.dataset
-            }
+            };
             molApi({
                 "service": "datasets/info",
                 "version": "1.0",
