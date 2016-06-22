@@ -61,6 +61,7 @@ angular.module('mol', [
     .state(
       'datasets.list',
       {
+        title: 'Datasets',
         views: {
           "content@datasets" :{
             templateUrl: "static/app/views/list/table.html",
@@ -73,6 +74,7 @@ angular.module('mol', [
     .state(
       'datasets.info',
       {
+        title: 'Dataset Info',
         views: {
           "content@datasets" :{
             templateUrl: "static/app/views/info/info.html",

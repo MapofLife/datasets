@@ -1,6 +1,7 @@
 angular.module('mol.controllers')
     .controller('molDatasetsListCtrl', ['$scope', '$rootScope', '$state', 'molApi',
         function($scope, $rootScope, $state, molApi) {
+            $rootScope.pagetitle = $state.current.title;
             $scope.loading = true;
             $scope.dslist = [];
             $scope.activeTabIndex = 0;
