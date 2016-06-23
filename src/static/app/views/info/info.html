@@ -17,7 +17,7 @@
             <strong>Taxonomic groups:</strong>
             {{ dsinfo.taxogroup }}</p>
         <p ng-show="dsinfo.url">Source:
-            <a href="{{ dsinfo.url }}">{{ dsinfo.url }}</a>
+            <a href="{{ dsinfo.url }}" target="_blank">{{ dsinfo.url }}</a>
         </p>
     </div>
 
@@ -26,7 +26,7 @@
         <h4>{{ md.section }}</h4>
         <div ng-repeat="mdc in md.children">
             <h5>{{ mdc.label }}</h5>
-            <p>{{ mdc.value }}</p>
+            <p ng-bind-html="mdc.value | linky:'_blank'"></p>
         </div>
     </div>
 </div>

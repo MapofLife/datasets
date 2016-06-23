@@ -87,4 +87,15 @@ angular.module('mol', [
     //Gets rid of the # in the querystring. Wont work on IE
     $locationProvider.html5Mode(true);
 
-});
+}).run(['$state', function($state) {
+  $state.originalHrefFunction = $state.href;
+  $state.href = function href(stateOrName, params, options) {
+    angular.extend(options, {absolute: true});
+    var result = $state.originalHrefFunction(stateOrName, params, options);
+    if (result) {
+      return result.replace('mapoflife.github.io', 'mol.org');
+    } else {
+      return result;
+    }
+  }
+}]);
