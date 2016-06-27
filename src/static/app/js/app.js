@@ -4,27 +4,14 @@
 angular.module('mol.controllers',[]);
 
 angular.module('mol', [
-  'ngSanitize',
-  'ngCookies',
   'ngAnimate',
-  'ngTouch',
   'mol.api',
   'mol.filters',
   'mol.services',
   'mol.controllers',
-  'mol.loading-indicator',
   'ui.bootstrap',
   'ui.router',
-  'percentage',
-  'km2',
-  'angular-loading-bar',
 ])
-.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = false;
-    cfpLoadingBarProvider.includeBar = false;
-    //cfpLoadingBarProvider.includeBar = false;
-    cfpLoadingBarProvider.latencyThreshold = 100;
-  }])
 .config(function($sceDelegateProvider,$stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
   var params = ""+
