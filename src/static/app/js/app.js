@@ -5,6 +5,7 @@ angular.module('mol.controllers',[]);
 
 angular.module('mol', [
   'ngAnimate',
+  'ngSanitize',
   'mol.api',
   'mol.filters',
   'mol.services',
