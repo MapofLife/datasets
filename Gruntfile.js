@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     copy : {
       main: {
         files: [
-          { expand:true, nonull: false, cwd: 'src', src: ['static/app/**/*.{html,png,jpg}'], dest: 'dist/'}
+          { expand:true, nonull: false, cwd: 'src', src: ['static/app/**/*.{html,png,jpg}','static/*.{png,jpg}'], dest: 'dist/'}
         ],
       },
     },

@@ -1,4 +1,4 @@
-# The datasets module
+# The inventory module
 
 A dataset listing and information application, written for Angular 1.5.x.
 
@@ -8,13 +8,13 @@ After cloning, install client dependencies...
 bower update
 ```
 
-Clone the MOL UI components into a seperate directory and link them in with bower
+Clone the MOL UI components into a separate directory and link them in with bower
 
 ```
 git clone git@github.com:MapofLife/ui-components /path/to/my/workspace/
 cd /path/to/my/workspace/ui-components
 bower link
-cd /path/to/my/workspace/species
+cd /path/to/my/workspace/inventory
 bower link mol-ui-components
 ```
 
@@ -30,13 +30,13 @@ Run the development server using
 grunt serve
 ```
 
-That will serve the application at the given base configured in package.json (here http://localhost:9001/species/)
+That will serve the application at the given base configured in package.json (here http://localhost:9001/inventory/)
 
 Build and deploy to gh-pages using
 
 ```
 grunt build
-git commit -m 'Updating dist'
+git commit -am 'Updating dist'
 grunt deploy
 ```
 

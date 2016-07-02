@@ -1,25 +1,35 @@
 {
-  "name": "species",
-  "description": "Map of Life Species Pages",
+  "name": "inventory",
+  "description": "Map of Life Dataset Inventory",
   "version": "0.0.1",
   "homepage": "https://github.com/MapofLife/ng-mol",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
-    "angular": "~1.5.0",
-    "angular-cookies": "~1.5.0",
-    "angular-sanitize": "~1.5.0",
+    "angular-google-maps": "~2.3.2",
+    "angular": "~1.5.5",
+    "angular-ui-select3": "ui-select#*",
+    "angular-cookies": "~1.5.5",
+    "angular-sanitize": "~1.5.5",
+    "angular-rangeslider": "~0.0.14",
+    "angular-bootstrap-checkbox": "~0.4.0",
     "angular-loading-bar": "~0.8.0",
-    "angular-resource": "~1.5.0",
+    "angular-resource": "~1.5.5",
     "angular-bootstrap": "1.0",
     "angular-ui-router": "~0.2.18",
+    "angular-nvd3": "~1.0.5",
     "bootstrap": "~3.3.6",
     "jquery": "~2.2.1",
-    "angular-animate": "~1.5.2",
-    "angular-touch": "~1.5.5"
+    "ui-leaflet": "~1.0.0",
+    "angular-filter": "~0.5.8",
+    "ui-select": "angular-ui-select#^0.16.1",
+    "angular-touch": "~1.5.5",
+    "angular-animate": "~1.5.1",
+    "angular-odometer": "~0.0.10",
+    "odometer": "~0.4.7",
+    "angular-count-to": "*"
   },
   "authors": [
-    "Jeremy Malczyk <jmalczyk@gmail.com>"
+    "Raphael LaFrance <raphael.lafrance@gmail.com>"
   ],
   "ignore": [
     "**/.*",
@@ -29,9 +39,11 @@
     "tests"
   ],
   "resolutions": {
-    "angular": "~1.5.0"
+    "angular": "~1.5.5",
+    "angular-simple-logger": "~0.1.4"
   },
   "dependencies": {
-    "lodash": "~4.13.1"
+    "angular-animate": "^1.5.7",
+    "Leaflet.fullscreen": "Leaflet/Leaflet.fullscreen#^1.0.1"
   }
 }
