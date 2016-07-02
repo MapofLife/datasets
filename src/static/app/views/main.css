@@ -1,0 +1,104 @@
+body {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.main {
+  display: -webkit-flex;
+  display: flex;
+  flex: 1;
+  -webkit-flex: 1;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.sidebar-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.sidebar {
+    position: relative;
+    max-width: 320px;
+    min-width: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 2pt solid gray;
+}
+
+.sidebar .dataset-count {
+  font-size: x-small;
+  float: right;
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+.sidebar a.badge {
+  background-color: white;
+  color: black;
+  border: 1px solid gray;
+  font-weight: bolder;
+  white-space: normal;
+  padding: 4px 8px;
+  margin: 0 2px 4px 0;
+}
+
+.sidebar a.badge:hover {
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.sidebar a.badge i.unselect {
+  color: gray;
+}
+
+.sidebar .fa-times.unselect-all {
+  margin-right: 8px;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.sidebar .fa-times.unselect-all:hover {
+  background-color: lightgray;
+}
+
+.sidebar .clear-all {
+  margin-top: 12px;
+}
+
+.sidebar .clear-all a {
+  color: gray;
+  padding: 4px 8px;
+}
+
+.sidebar .clear-all:hover a {
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: black;
+}
+
+.sidebar .nothing-selected {
+  color: gray;
+}
+
+.mol-facets > div {
+  margin-bottom: 20px;
+}
+
+.content-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+footer {
+  display: block;
+  position: relative;
+}

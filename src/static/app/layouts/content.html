@@ -1,0 +1,7 @@
+<div ng-if="loading" class="animate-if text-center" ng-cloak style="flex:1;margin:auto">
+    <i style="opacity:0.6" class="fa fa-refresh fa-spin fa-5x fa-5x"></i>
+</div>
+<div style="flex:1;-webkit-flex:1;display:flex; flex-direction:column" ng-if="!loading" class="animate-if" ng-cloak>
+    <div style="display:flex;display:-webkit-flex;width:100%;min-height:300px" ui-view="map"></div>
+    <div style="flex:1; display:flex;overflow-x:hidden" ui-view="info-pane"></div>
+</div>

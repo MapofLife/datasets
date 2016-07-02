@@ -1,0 +1,7 @@
+.angular-leaflet-map {
+        -webkit-flex: 1;
+        flex: 1;
+}
+.leaflet-control-layers {
+  display:none;
+}
