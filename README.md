@@ -1,4 +1,4 @@
-# The inventory module
+# The datasets module (wuz inventory module)
 
 A dataset listing and information application, written for Angular 1.5.x.
 
