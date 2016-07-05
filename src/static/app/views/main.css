@@ -91,14 +91,6 @@ body {
   margin-bottom: 20px;
 }
 
-.content-container {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex: 1;
-    flex: 1;
-}
-
-footer {
-  display: block;
-  position: relative;
+.info-content {
+  margin-bottom: 35px;
 }
