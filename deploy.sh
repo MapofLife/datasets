@@ -1,3 +1,3 @@
 grunt build
-git commit -am "Updating build"
+git commit -a -m "Updating build"
 grunt deploy
