@@ -18,6 +18,9 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
             position: 'topright'
         }
     },
+    options: {
+      minZoom:2
+    },
     layers: {
       baselayers: {
         xyz: {
