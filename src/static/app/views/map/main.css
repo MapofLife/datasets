@@ -9,12 +9,22 @@
   display:none;
 }
 
+.legend::before {
+  content: "Number of Datasets";
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+  position: relative;
+  top: -0.4em;
+}
+
 .legend {
+  position: relative;
   font: 12px/14px Arial, Helvetica, sans-serif;
   background: rgba(255,255,255, 0.9);
   border-radius: 5px;
   width: 100%;
-  padding: 6px 8px;
+  padding: 10px 8px 6px 8px;
   margin-right: 4px;
   white-space: nowrap;
   color: #555;

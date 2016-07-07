@@ -80,11 +80,10 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     var used = {};
     legendData.colors.reduce(function(prev, curr, i) {
       var item = {
-        low: i ? legendData.bins[i-1] + 1 : 0,
+        low: i ? legendData.bins[i-1] + 1 : 1,
         high: i > legendData.bins.length - 1 ? 'and over' : legendData.bins[i],
         color: curr
       };
-      console.log(item);
       if (!used[item.high]) {
         used[item.high] = true;
         prev.push(item);
@@ -92,13 +91,13 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       return prev;
     }, []).forEach(function(item) {
       if (item.low == item.high) {
-        legend.labels.push('' + item.low + ' datasets');
+        legend.labels.push('' + item.low);
       } else {
-        legend.labels.push('' + item.low + ' - ' + item.high + ' datasets');
+        var h = item.high;
+        legend.labels.push('' + item.low + (isNaN(h) ? ' ' + h : ' - ' + h));
       }
       legend.colors.push(item.color);
     });
-    console.log(legend);
     return legend;
   };
 
