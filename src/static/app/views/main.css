@@ -37,6 +37,10 @@ body {
   margin-right: 4px;
 }
 
+html {
+  height: auto;
+}
+
 .sidebar a.badge {
   background-color: white;
   color: black;
@@ -89,8 +93,4 @@ body {
 
 .mol-facets > div {
   margin-bottom: 20px;
-}
-
-.info-content {
-  margin-bottom: 35px;
 }

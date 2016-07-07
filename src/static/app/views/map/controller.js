@@ -54,7 +54,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       canceller: $scope.canceller,
       loading: true
     }).then(function(response) {
-      console.log(response.data);
+      // console.log(response.data);
       var bounds = leafletBoundsHelpers.createBoundsFromArray([
         response.data.extent.coordinates[0][2].reverse(),
         response.data.extent.coordinates[0][0].reverse(),
