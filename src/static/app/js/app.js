@@ -72,16 +72,6 @@ angular.module('mol.datasets', [
       }
     )
     .state(
-      'datasets.table',
-      {
-        title: "Dataset datasets Table",
-        views: {
-          "content@datasets" : { templateUrl: "static/app/views/table/main.html"}
-        },
-        url: '/table/:dataset'
-      }
-    )
-    .state(
       'datasets.info',
       {
         title: 'Dataset Info',

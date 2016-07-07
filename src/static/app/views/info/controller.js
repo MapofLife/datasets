@@ -5,12 +5,12 @@ angular.module('mol.controllers')
       $scope.loading = true;
       $scope.dsinfo = {};
       var dsparams = {
-        'dataset_id': $state.params.dataset
+        dataset_id: $state.params.dataset
       };
       molApi({
-        "service": "datasets/info",
-        "params": dsparams,
-        "loading": true
+        service: 'datasets/info',
+        params: dsparams,
+        loading: true
       }).then(function(result) {
         $scope.dsinfo = result.data;
         $scope.loading = false;

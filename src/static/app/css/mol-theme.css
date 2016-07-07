@@ -22,7 +22,7 @@ header {
 	margin: 0;
 	padding: 0;
 	position: relative;
-	
+
 }
 body, caption, th, td, input, textarea, select, option, legend, fieldset {
 	font-family: "Fira Sans","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
@@ -424,8 +424,7 @@ margin: 0;
     line-height: 2em;
 }
 .header {
-    background: #fff url(../images/header_background.png)
-        no-repeat bottom center;
+    background: #fff url(../images/header_background.png) no-repeat bottom center;
 }
 
 .footer {
@@ -433,8 +432,7 @@ margin: 0;
 		position: absolute;
 		bottom: 0;
     color: #fff;
-    background: #062d66
-        url(../img/footer_background.png) no-repeat left bottom;
+    background: #062d66 url(../img/footer_background.png) no-repeat left bottom;
     /*height: 15em;*/
     margin-top: 5px;
     width: 100%;
