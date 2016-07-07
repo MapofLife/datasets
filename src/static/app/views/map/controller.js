@@ -2,7 +2,6 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     ['$scope', 'leafletData', 'leafletBoundsHelpers','$timeout', '$window', '$http', '$filter', 'molApi','$q','$state',
     function($scope, leafletData, leafletBoundsHelpers,$timeout, $window, $http, $filter, molApi,$q,$state) {
 
-
   $scope.$watch('model.choices', function() {
     $scope.datasetsQuery();
   }, true);
@@ -32,6 +31,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       }
     },
     defaults: {},
+    legend: {},
   };
 
   $scope.canceller = $q.defer();
@@ -42,8 +42,8 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       payload[facet] = Object.keys(choices).filter(function(choice) {return choices[choice]} ).join(',').toLowerCase() || '';
     });
 
-    if($state.params.dataset) {
-      payload={dataset_id:$state.params.dataset}
+    if ($state.params.dataset) {
+      payload={ dataset_id:$state.params.dataset };
     }
 
     $scope.canceller.resolve();
@@ -54,7 +54,6 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       canceller: $scope.canceller,
       loading: true
     }).then(function(response) {
-      // console.log(response.data);
       var bounds = leafletBoundsHelpers.createBoundsFromArray([
         response.data.extent.coordinates[0][2].reverse(),
         response.data.extent.coordinates[0][0].reverse(),
@@ -69,7 +68,38 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
          doRefresh: true
        }
      };
+     $scope.map.legend = $scope.buildLegend(response.data.legend);
     });
+  };
+
+  $scope.buildLegend = function(legendData) {
+    if ($state.params.dataset) {
+      return {};
+    }
+    var legend = { position: 'bottomleft', labels: [], colors: [] };
+    var used = {};
+    legendData.colors.reduce(function(prev, curr, i) {
+      var item = {
+        low: i ? legendData.bins[i-1] + 1 : 0,
+        high: i > legendData.bins.length - 1 ? 'and over' : legendData.bins[i],
+        color: curr
+      };
+      console.log(item);
+      if (!used[item.high]) {
+        used[item.high] = true;
+        prev.push(item);
+      }
+      return prev;
+    }, []).forEach(function(item) {
+      if (item.low == item.high) {
+        legend.labels.push('' + item.low + ' datasets');
+      } else {
+        legend.labels.push('' + item.low + ' - ' + item.high + ' datasets');
+      }
+      legend.colors.push(item.color);
+    });
+    console.log(legend);
+    return legend;
   };
 
 }]);
