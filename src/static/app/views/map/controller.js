@@ -73,9 +73,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   };
 
   $scope.buildLegend = function(legendData) {
-    if ($state.params.dataset) {
-      return {};
-    }
+
     var legend = { position: 'bottomleft', labels: [], colors: [] };
     var used = {};
     legendData.colors.reduce(function(prev, curr, i) {
@@ -98,6 +96,10 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       }
       legend.colors.push(item.color);
     });
+    if ($state.params.dataset) {
+      legend.labels = legend.labels.slice(0, 1);
+      legend.colors = legend.colors.slice(0, 1);
+    }
     return legend;
   };
 
