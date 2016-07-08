@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr>
+        <th style="white-space:nowrap" ng-repeat="field in model.facets.fields track by $index" ng-click="toggleSort($index)">
+          <span ng-bind-html="field.title"></span>
+          <i class="fa fa-sort" aria-hidden="true" ng-show="sortColumn != $index"></i>
+          <i class="fa" ng-class="{'fa-sort-asc': !reverse, 'fa-sort-desc':reverse}"
+            aria-hidden="true" ng-show="sortColumn == $index"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ui-sref="datasets.info({dataset: getValue(row, 'dataset_id')})" ui-sref-options="{reload:true}"
+        class="clickable" ng-repeat="row in model.facets.rows | choiceFilter:model.choices:model.facets | orderBy:columnValue:reverse">
+        <td ng-repeat="cell in row">
+          <div ng-repeat="content in cell" ng-bind-html="content.title"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
