@@ -1,9 +1,9 @@
 angular.module('mol.controllers').controller('molDatasetsMapCtrl',
-    ['$scope', 'leafletData', 'leafletBoundsHelpers','$timeout', '$window', '$http', '$filter', 'molApi','$q','$state',
-    function($scope, leafletData, leafletBoundsHelpers,$timeout, $window, $http, $filter, molApi,$q,$state) {
+    ['$scope', 'leafletData', 'leafletBoundsHelpers', '$timeout', '$window', '$http', '$filter', 'molApi', '$q', '$state',
+    function($scope, leafletData, leafletBoundsHelpers, $timeout, $window, $http, $filter, molApi, $q, $state) {
 
   $scope.$watch('model.choices', function() {
-    $scope.datasetsQuery();
+    $timeout($scope.datasetsQuery);
   }, true);
 
   $scope.map = {
@@ -18,8 +18,8 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         position: 'topright'
       }
     },
-    options: {
-      minZoom:2
+    defaults: {
+      minZoom: 2
     },
     layers: {
       baselayers: {
@@ -30,20 +30,20 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         }
       }
     },
-    defaults: {},
     legend: {},
   };
 
   $scope.canceller = $q.defer();
+
   $scope.datasetsQuery = function() {
     var payload = {};
-    Object.keys($scope.model.choices).map(function (facet) {
+    Object.keys($scope.model.choices).forEach(function (facet) {
       var choices = $scope.model.choices[facet];
       payload[facet] = Object.keys(choices).filter(function(choice) {return choices[choice]} ).join(',').toLowerCase() || '';
     });
 
     if ($state.params.dataset) {
-      payload={ dataset_id:$state.params.dataset };
+      payload={ dataset_id: $state.params.dataset };
     }
 
     $scope.canceller.resolve();
@@ -54,26 +54,24 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       canceller: $scope.canceller,
       loading: true
     }).then(function(response) {
-      var bounds = leafletBoundsHelpers.createBoundsFromArray([
+      $scope.map.bounds = leafletBoundsHelpers.createBoundsFromArray([
         response.data.extent.coordinates[0][2].reverse(),
-        response.data.extent.coordinates[0][0].reverse(),
+        response.data.extent.coordinates[0][0].reverse()
       ]);
-     $scope.map.bounds = bounds;
-     $scope.map.layers.overlays = {
-       xyz: {
-         name: 'Datasets',
-         visible: true,
-         url: response.data.tile_url,
-         type: 'xyz',
-         doRefresh: true
-       }
-     };
-     $scope.map.legend = $scope.buildLegend(response.data.legend);
+      $scope.map.layers.overlays = {
+        xyz: {
+          name: 'Datasets',
+          visible: true,
+          url: response.data.tile_url,
+          type: 'xyz',
+          doRefresh: true
+        }
+      };
+      $scope.map.legend = $scope.buildLegend(response.data.legend);
     });
   };
 
   $scope.buildLegend = function(legendData) {
-
     var legend = { position: 'bottomleft', labels: [], colors: [] };
     var used = {};
     legendData.colors.reduce(function(prev, curr, i) {
