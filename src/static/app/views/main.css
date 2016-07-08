@@ -94,3 +94,11 @@ html {
 .mol-facets > div {
   margin-bottom: 20px;
 }
+
+.navbar-nav {
+  margin: 0;
+}
+
+.navbar-nav li {
+  width: 124px;
+}
