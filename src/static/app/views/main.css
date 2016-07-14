@@ -114,28 +114,30 @@ html {
   align-items: stretch;
 }
 
-.layouts-sidebar .sidebar-scroll-container {
+.sidebar-scroll-container {
   position: relative;
   max-width: 90%;
+  width: 90%;
   border: 0;
   overflow-x: hidden;
   overflow-y: auto;
   transition: all 0.7s ease;
 }
-
-.layouts-sidebar .sidebar-scroll-container.closed {
-  max-width:0;
+.sidebar-scroll-container.closed {
+  min-width: 0;
+  max-width: 0;
   padding: 0;
-  overflow: hidden;
   transition: all 0.7s ease;
+  overflow: hidden;
 }
 
 .sidebar-toggle {
   position: absolute;
-  z-index:  1000;
   top: 390px;
+  left: 320px;
+  z-index:  1000;
   width: 40px;
-  height:40px;
+  height: 40px;
   margin: auto;
   padding:10px;
   color: #555555;
@@ -145,11 +147,12 @@ html {
   border-right: 1pt solid grey;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  left: 318px;
+  transition: all 0.7s ease;
 }
 
 .sidebar-toggle.toggle-closed {
   left: 0;
+  transition: all 0.7s ease;
 }
 
 .layouts-sidebar .sidebar {
@@ -161,7 +164,6 @@ html {
   font-size: 10pt;
   max-width: 100%;
   padding: 15px;
-  min-width: 290px;
   width: 400px;
   max-width: 100%;
 }
