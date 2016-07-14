@@ -1,4 +1,4 @@
-# The datasets module (wuz inventory module)
+# The datasets module
 
 A dataset listing and information application, written for Angular 1.5.x.
 
@@ -14,7 +14,7 @@ Clone the MOL UI components into a separate directory and link them in with bowe
 git clone git@github.com:MapofLife/ui-components /path/to/my/workspace/
 cd /path/to/my/workspace/ui-components
 bower link
-cd /path/to/my/workspace/inventory
+cd /path/to/my/workspace/datasets
 bower link mol-ui-components
 ```
 

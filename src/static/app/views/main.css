@@ -120,32 +120,20 @@ html {
   border: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  transition: all 0.7s ease;
 }
 
-.layouts-sidebar .sidebar-scroll-container {
-  position: relative;
-  max-width: 90%;
-  border: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition:all 0.7s ease;
-}
-
-.layouts-sidebar .closed {
+.layouts-sidebar .sidebar-scroll-container.closed {
   max-width:0;
   padding: 0;
   overflow: hidden;
-  transition:all 0.7s ease;
-}
-
-.layouts-sidebar .sidebar-toggle.right.toggle-closed  {
-  right: 0px;
+  transition: all 0.7s ease;
 }
 
 .sidebar-toggle {
-  position:absolute;
+  position: absolute;
   z-index:  1000;
-  top: 320px;
+  top: 390px;
   width: 40px;
   height:40px;
   margin: auto;
@@ -154,20 +142,14 @@ html {
   background-color: white;
   border-bottom: 1pt solid grey;
   border-top: 1pt solid grey;
-}
-
-.sidebar-toggle.right {
-  left: 280px;
-  border-left: 1pt solid grey;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-
-}
-
-.sidebar-toggle.left {
   border-right: 1pt solid grey;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  left: 318px;
+}
+
+.sidebar-toggle.toggle-closed {
+  left: 0;
 }
 
 .layouts-sidebar .sidebar {
@@ -189,49 +171,4 @@ html {
   display: -webkit-flex;
   flex: 1;
   -webkit-flex: 1;
-}
-
-.layouts-sidebar .map-container {
-  display: flex;
-  display: -webkit-flex;
-  flex: 1;
-  -webkit-flex: 1;
-}
-
-.layouts-sidebar .angular-google-map {
-  display: -webkit-flex;
-  display: flex;
-  flex: 1;
-  -webkit-flex: 1;
-  .google-map-canvas, .google-map-canvas * { .box-sizing(content-box); }
-
-  /* Optional responsive image override */
-  img { max-width: none; }
-}
-
-.layouts-sidebar .angular-google-map .angular-google-map-container {
-  -webkit-flex: 1;
-  flex: 1;
-  border-right: 0.5pt solid grey;
-  border-left: 0.5pt solid grey;
-  }
-
-.layouts-sidebar mol-loading-indicator {
-  position: absolute;
-  left: 50%;
-  top; 10px;
-}
-
-.layouts-map-wrap-right .map {
-  float:right;
-  position: relative;
-  margin: 10px;
-  width:600px;
-  height:400px;
-  max-width:95%;
-}
-
-.layouts-map-wrap-right .google-map .angular-google-map-container{
-  width:600px;
-  height:400px;
 }
