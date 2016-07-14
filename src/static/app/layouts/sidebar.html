@@ -1,5 +1,23 @@
 <div class="layouts-sidebar">
-  <div class="sidebar-scroll-container" ui-view="sidebar"></div>
+  <i class="fa fa-lg fa-chevron-right clickable sidebar-toggle left"
+    ng-show="rc"
+    ng-click="rc = !rc"
+    uib-tooltip="'Hide sidebar'"
+    tooltip-placement="right">
+  </i>
+  <i class="fa fa-lg fa-chevron-left clickable sidebar-toggle right"
+    ng-show="!rc"
+    uib-tooltip="'Show sidebar'"
+    tooltip-placement="left"
+    ng-click="rc = !rc">
+  </i>
+  <div class="sidebar-scroll-container right"
+    ng-swipe-right="rc = true"
+    ng-swipe-disable-mouse
+    ui-view="sidebar"
+    ng-class="{'closed': rc}"
+    ng-show="!rc">
+  </div>
   <div class="content-scroll-container" ui-view="content"></div>
   <mol-loading-indicator style="position:absolute; top:128px; left:48%"></mol-loading-indicator>
 </div>

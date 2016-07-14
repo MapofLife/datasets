@@ -14,11 +14,6 @@ angular.module('mol.controllers')
     });
   };
 
-  //if($state.params.dataset) {
-  //  $scope.model.choices.dataset_id = {}
-  //  $scope.model.choices.dataset_id[$state.params.dataset]=true;
-  //}
-
   $scope.getValue = function(row, columnName) {
     var index = $scope.model.facets.fields.reduce(function(prev, curr, i) {
       return curr.value == columnName ? i : prev;
