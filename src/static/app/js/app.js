@@ -49,10 +49,9 @@ angular.module('mol.datasets', [
         }
       }
     )
-
     .state(
       'datasets.all', {
-        abstract:true,
+        abstract: true,
         title: 'Datasets Info',
         views: {
           '': {
@@ -65,8 +64,8 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/layouts/content.html'
           }
         },
-      },
-      url: '/'
+        url: '/'
+      }
     )
     .state(
       'datasets.all.map', {
@@ -76,7 +75,7 @@ angular.module('mol.datasets', [
             controller: 'molDatasetsMapCtrl'
           }
         },
-        url: '/map'
+        url: 'map'
       }
     )
     .state(
@@ -86,7 +85,7 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/views/table/main.html'
           }
         },
-        url: '/list'
+        url: 'list'
       }
     )
     .state(

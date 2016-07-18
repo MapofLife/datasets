@@ -137,7 +137,7 @@ html {
 
 .sidebar-toggle {
   position: absolute;
-  top: 390px;
+  top: 72px;
   left: 320px;
   z-index:  1000;
   width: 40px;
@@ -166,7 +166,6 @@ html {
   right:0px;
   background-color: white;
   font-size: 10pt;
-  max-width: 100%;
   padding: 15px;
   width: 400px;
   max-width: 100%;
