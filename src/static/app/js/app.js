@@ -39,74 +39,130 @@ angular.module('mol.datasets', [
   $urlRouterProvider.otherwise('/table/');
   $stateProvider
     .state(
-      'datasets',
-      {
-         abstract: true,
-         views: {
-           '': {
-              templateUrl: 'static/app/layouts/base.html',
-              controller: 'molDatasetsCtrl'
-            }
-         }
+      'datasets', {
+        abstract: true,
+        views: {
+          '': {
+            templateUrl: 'static/app/layouts/base.html',
+            controller: 'molDatasetsCtrl'
+          }
+        }
       }
     )
     .state(
-      'datasets.all',
-      {
+      'datasets.all', {
         title: 'Datasets Map',
         views: {
-          abstract: true,
-          '@datasets' : { templateUrl: 'static/app/layouts/sidebar.html'},
-          'sidebar@datasets.all' : {
-            templateUrl: 'static/app/views/sidebar.html'},
-          'content@datasets.all' : {
-            templateUrl: 'static/app/layouts/content.html'},
-          'map@datasets.all' : {
+          '@datasets': {
+            templateUrl: 'static/app/layouts/sidebar.html'
+          },
+          'sidebar@datasets.all': {
+            templateUrl: 'static/app/views/sidebar.html'
+          },
+          'content@datasets.all': {
+            templateUrl: 'static/app/layouts/content.html'
+          },
+          'map@datasets.all': {
             templateUrl: 'static/app/views/map/main.html',
-            controller: 'molDatasetsMapCtrl'},
-          'info-pane@datasets.all' : {
-            templateUrl: 'static/app/views/table/main.html'},
+            controller: 'molDatasetsMapCtrl'
+          },
+          'info-pane@datasets.all': {
+            templateUrl: 'static/app/views/table/main.html'
+          },
         },
         url: '/'
       }
     )
     .state(
-      'datasets.all.map',
-      {
+      'datasets.all.map', {
+        views: {
+          '@datasets': {
+            templateUrl: 'static/app/layouts/sidebar.html'
+          },
+          'sidebar@datasets.all.map': {
+            templateUrl: 'static/app/views/sidebar.html'
+          },
+          'content@datasets.all.map': {
+            templateUrl: 'static/app/layouts/content.html'
+          },
+          'map@datasets.all.map': {
+            templateUrl: 'static/app/views/map/main.html',
+            controller: 'molDatasetsMapCtrl'
+          },
+        },
       }
     )
     .state(
-      'datasets.all.list',
-      {
-        title: 'Datasets Map',
+      'datasets.all.list', {
         views: {
-          '@datasets' : { templateUrl: 'static/app/layouts/sidebar.html'},
-          'sidebar@datasets.all.list' : {
-            templateUrl: 'static/app/views/sidebar.html'},
-          'content@datasets.all.list' : {
-            templateUrl: 'static/app/layouts/content.html'},
-          'map@datasets.all.list' : {},
-          'info-pane@datasets.all.list' : {
-          templateUrl: 'static/app/views/table/main.html'},
+          '@datasets': {
+            templateUrl: 'static/app/layouts/sidebar.html'
+          },
+          'sidebar@datasets.all.list': {
+            templateUrl: 'static/app/views/sidebar.html'
+          },
+          'content@datasets.all.list': {
+            templateUrl: 'static/app/layouts/content.html'
+          },
+          'map@datasets.all.list': {},
+          'info-pane@datasets.all.list': {
+            templateUrl: 'static/app/views/table/main.html'
+          },
         }
       }
     )
     .state(
-      'datasets.info',
-      {
+      'datasets.info', {
         title: 'Dataset Info',
         views: {
-          '@datasets' : { templateUrl: 'static/app/layouts/basic.html'},
-          'content@datasets.info' : {
-            templateUrl: 'static/app/layouts/content.html'},
-          'map@datasets.info' : {
+          '@datasets': {
+            templateUrl: 'static/app/layouts/basic.html'
+          },
+          'content@datasets.info': {
+            templateUrl: 'static/app/layouts/content.html'
+          },
+          'map@datasets.info': {
             templateUrl: 'static/app/views/map/main.html',
-            controller: 'molDatasetsMapCtrl'},
-          'info-pane@datasets.info' : {
+            controller: 'molDatasetsMapCtrl'
+          },
+          'info-pane@datasets.info': {
             templateUrl: 'static/app/views/info/info.html',
-            controller: 'molDatasetsInfoCtrl'}
+            controller: 'molDatasetsInfoCtrl'
+          }
         },
         url: '/:dataset'
+      }
+    )
+    .state(
+      'datasets.info.map', {
+        views: {
+          '@datasets': {
+            templateUrl: 'static/app/layouts/basic.html'
+          },
+          'content@datasets.info.map': {
+            templateUrl: 'static/app/layouts/content.html'
+          },
+          'map@datasets.info.map': {
+            templateUrl: 'static/app/views/map/main.html',
+            controller: 'molDatasetsMapCtrl'
+          },
+        }
+      }
+    )
+    .state(
+      'datasets.info.info', {
+        views: {
+          '@datasets': {
+            templateUrl: 'static/app/layouts/basic.html'
+          },
+          'content@datasets.info.info': {
+            templateUrl: 'static/app/layouts/content.html'
+          },
+          'info-pane@datasets.info.info': {
+            templateUrl: 'static/app/views/info/info.html',
+            controller: 'molDatasetsInfoCtrl'
+          }
+        }
       }
     );
     $locationProvider.html5Mode(true);

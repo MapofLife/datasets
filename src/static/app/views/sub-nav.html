@@ -9,15 +9,32 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="display-toggle" off-ng-show="$state.$current.name == 'datasets.all'">
+            <li class="display-toggle" ng-show="$state.$current.name == 'datasets.all' || $state.$current.name == 'datasets.all.map'">
               <a ui-sref="datasets.all.list">Hide Map</a>
             </li>
-            <li class="tile-toggle" off-ng-show="$state.$current.name == 'datasets.all'">
+            <li class="display-toggle" ng-show="$state.$current.name == 'datasets.all.list'">
+              <a ui-sref="datasets.all">Show Map</a>
+            </li>
+            <li class="tile-toggle" ng-show="$state.$current.name == 'datasets.all' || $state.$current.name == 'datasets.all.list'">
               <a ui-sref="datasets.all.map">Hide List</a>
             </li>
-            <li class="tile-toggle" ng-show="$state.$current.name == 'datasets.info'">
-              <a ui-sref="datasets.info.info">Hide Info</a>
+            <li class="display-toggle" ng-show="$state.$current.name == 'datasets.all.map'">
+              <a ui-sref="datasets.all">Show List</a>
             </li>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="display-toggle" ng-show="$state.$current.name == 'datasets.info' || $state.$current.name == 'datasets.info.map'">
+                <a ui-sref="datasets.info.info">Hide Map</a>
+              </li>
+              <li class="display-toggle" ng-show="$state.$current.name == 'datasets.info.info'">
+                <a ui-sref="datasets.info">Show Map</a>
+              </li>
+              <li class="tile-toggle" ng-show="$state.$current.name == 'datasets.info' || $state.$current.name == 'datasets.info.info'">
+                <a ui-sref="datasets.info.map">Hide Info</a>
+              </li>
+              <li class="display-toggle" ng-show="$state.$current.name == 'datasets.info.map'">
+                <a ui-sref="datasets.info">Show Info</a>
+              </li>
           </ul>
         </div>
       </div>
