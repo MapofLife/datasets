@@ -49,11 +49,13 @@ angular.module('mol.datasets', [
         }
       }
     )
+
     .state(
       'datasets.all', {
-        title: 'Datasets Map',
+        abstract:true,
+        title: 'Datasets Info',
         views: {
-          '@datasets': {
+          '': {
             templateUrl: 'static/app/layouts/sidebar.html'
           },
           'sidebar@datasets.all': {
@@ -61,54 +63,30 @@ angular.module('mol.datasets', [
           },
           'content@datasets.all': {
             templateUrl: 'static/app/layouts/content.html'
-          },
-          'map@datasets.all': {
-            templateUrl: 'static/app/views/map/main.html',
-            controller: 'molDatasetsMapCtrl'
-          },
-          'info-pane@datasets.all': {
-            templateUrl: 'static/app/views/table/main.html'
-          },
+          }
         },
-        url: '/'
-      }
+      },
+      url: '/'
     )
     .state(
       'datasets.all.map', {
         views: {
-          '@datasets': {
-            templateUrl: 'static/app/layouts/sidebar.html'
-          },
-          'sidebar@datasets.all.map': {
-            templateUrl: 'static/app/views/sidebar.html'
-          },
-          'content@datasets.all.map': {
-            templateUrl: 'static/app/layouts/content.html'
-          },
-          'map@datasets.all.map': {
+          'map@datasets.all': {
             templateUrl: 'static/app/views/map/main.html',
             controller: 'molDatasetsMapCtrl'
-          },
+          }
         },
+        url: '/map'
       }
     )
     .state(
       'datasets.all.list', {
         views: {
-          '@datasets': {
-            templateUrl: 'static/app/layouts/sidebar.html'
-          },
-          'sidebar@datasets.all.list': {
-            templateUrl: 'static/app/views/sidebar.html'
-          },
-          'content@datasets.all.list': {
-            templateUrl: 'static/app/layouts/content.html'
-          },
-          'map@datasets.all.list': {},
-          'info-pane@datasets.all.list': {
+          'info-pane@datasets.all': {
             templateUrl: 'static/app/views/table/main.html'
-          },
-        }
+          }
+        },
+        url: '/list'
       }
     )
     .state(
