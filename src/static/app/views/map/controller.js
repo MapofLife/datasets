@@ -3,7 +3,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     function($scope, leafletData, leafletBoundsHelpers, $timeout, $window, $http, $filter, molApi, $q, $state) {
 
   $scope.$watch('model.choices', function() {
-    $scope.map.legend = undefined;
+    $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
     $scope.map.layers.overlays = {};
     $timeout($scope.datasetsQuery);
   }, true);
@@ -45,7 +45,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     });
 
     if ($state.params.dataset) {
-      payload={ dataset_id: $state.params.dataset };
+      payload = { dataset_id: $state.params.dataset };
     }
 
     $scope.canceller.resolve();
