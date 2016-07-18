@@ -21,6 +21,10 @@ body {
     flex: 1;
 }
 
+.navigation .tile-toggle {
+  white-space: nowrap;
+}
+
 .sidebar {
     position: relative;
     max-width: 320px;

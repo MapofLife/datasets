@@ -36,14 +36,14 @@ angular.module('mol.datasets', [
     'http*://api.mol.org/1.0/datasets/**',
     'http*://mapoflife.github.io/**',
   ]);
-  $urlRouterProvider.otherwise("/table/");
+  $urlRouterProvider.otherwise('/table/');
   $stateProvider
     .state(
       'datasets',
       {
-         abstract:true,
+         abstract: true,
          views: {
-           "": {
+           '': {
               templateUrl: 'static/app/layouts/base.html',
               controller: 'molDatasetsCtrl'
             }
@@ -53,22 +53,42 @@ angular.module('mol.datasets', [
     .state(
       'datasets.all',
       {
-        title: "Dataset datasets Map",
+        title: 'Datasets Map',
         views: {
-
-          "@datasets" : { templateUrl: 'static/app/layouts/sidebar.html'},
-          "sidebar@datasets.all" : {
+          abstract: true,
+          '@datasets' : { templateUrl: 'static/app/layouts/sidebar.html'},
+          'sidebar@datasets.all' : {
             templateUrl: 'static/app/views/sidebar.html'},
-          "content@datasets.all" : {
-            templateUrl: "static/app/layouts/content.html"},
-          "map@datasets.all" : {
-            templateUrl: "static/app/views/map/main.html",
+          'content@datasets.all' : {
+            templateUrl: 'static/app/layouts/content.html'},
+          'map@datasets.all' : {
+            templateUrl: 'static/app/views/map/main.html',
             controller: 'molDatasetsMapCtrl'},
-          "info-pane@datasets.all" : {
-            templateUrl: "static/app/views/table/main.html"},
-
+          'info-pane@datasets.all' : {
+            templateUrl: 'static/app/views/table/main.html'},
         },
         url: '/'
+      }
+    )
+    .state(
+      'datasets.all.map',
+      {
+      }
+    )
+    .state(
+      'datasets.all.list',
+      {
+        title: 'Datasets Map',
+        views: {
+          '@datasets' : { templateUrl: 'static/app/layouts/sidebar.html'},
+          'sidebar@datasets.all.list' : {
+            templateUrl: 'static/app/views/sidebar.html'},
+          'content@datasets.all.list' : {
+            templateUrl: 'static/app/layouts/content.html'},
+          'map@datasets.all.list' : {},
+          'info-pane@datasets.all.list' : {
+          templateUrl: 'static/app/views/table/main.html'},
+        }
       }
     )
     .state(
@@ -76,14 +96,14 @@ angular.module('mol.datasets', [
       {
         title: 'Dataset Info',
         views: {
-          "@datasets" : { templateUrl: 'static/app/layouts/basic.html'},
-          "content@datasets.info" : {
-            templateUrl: "static/app/layouts/content.html"},
-          "map@datasets.info" : {
-            templateUrl: "static/app/views/map/main.html",
+          '@datasets' : { templateUrl: 'static/app/layouts/basic.html'},
+          'content@datasets.info' : {
+            templateUrl: 'static/app/layouts/content.html'},
+          'map@datasets.info' : {
+            templateUrl: 'static/app/views/map/main.html',
             controller: 'molDatasetsMapCtrl'},
-          "info-pane@datasets.info" : {
-            templateUrl: "static/app/views/info/info.html",
+          'info-pane@datasets.info' : {
+            templateUrl: 'static/app/views/info/info.html',
             controller: 'molDatasetsInfoCtrl'}
         },
         url: '/:dataset'

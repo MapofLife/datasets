@@ -8,6 +8,17 @@
               <a ui-sref="datasets.all">All datasets</a>
             </li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="display-toggle" off-ng-show="$state.$current.name == 'datasets.all'">
+              <a ui-sref="datasets.all.list">Hide Map</a>
+            </li>
+            <li class="tile-toggle" off-ng-show="$state.$current.name == 'datasets.all'">
+              <a ui-sref="datasets.all.map">Hide List</a>
+            </li>
+            <li class="tile-toggle" ng-show="$state.$current.name == 'datasets.info'">
+              <a ui-sref="datasets.info.info">Hide Info</a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
