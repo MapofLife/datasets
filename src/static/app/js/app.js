@@ -36,7 +36,7 @@ angular.module('mol.datasets', [
     'http*://api.mol.org/1.0/datasets/**',
     'http*://mapoflife.github.io/**',
   ]);
-  $urlRouterProvider.otherwise('/table/');
+  $urlRouterProvider.otherwise('map');
   $stateProvider
     .state(
       'datasets', {
@@ -90,22 +90,15 @@ angular.module('mol.datasets', [
     )
     .state(
       'datasets.info', {
+        abstract: true,
         title: 'Dataset Info',
         views: {
-          '@datasets': {
+          '': {
             templateUrl: 'static/app/layouts/basic.html'
           },
           'content@datasets.info': {
             templateUrl: 'static/app/layouts/content.html'
           },
-          'map@datasets.info': {
-            templateUrl: 'static/app/views/map/main.html',
-            controller: 'molDatasetsMapCtrl'
-          },
-          'info-pane@datasets.info': {
-            templateUrl: 'static/app/views/info/info.html',
-            controller: 'molDatasetsInfoCtrl'
-          }
         },
         url: '/:dataset'
       }
@@ -113,33 +106,23 @@ angular.module('mol.datasets', [
     .state(
       'datasets.info.map', {
         views: {
-          '@datasets': {
-            templateUrl: 'static/app/layouts/basic.html'
-          },
-          'content@datasets.info.map': {
-            templateUrl: 'static/app/layouts/content.html'
-          },
-          'map@datasets.info.map': {
+          'map@datasets.info': {
             templateUrl: 'static/app/views/map/main.html',
             controller: 'molDatasetsMapCtrl'
           },
-        }
+        },
+        url: '/map'
       }
     )
     .state(
       'datasets.info.info', {
         views: {
-          '@datasets': {
-            templateUrl: 'static/app/layouts/basic.html'
-          },
-          'content@datasets.info.info': {
-            templateUrl: 'static/app/layouts/content.html'
-          },
-          'info-pane@datasets.info.info': {
+          'info-pane@datasets.info': {
             templateUrl: 'static/app/views/info/info.html',
             controller: 'molDatasetsInfoCtrl'
           }
-        }
+        },
+        url: '/info'
       }
     );
     $locationProvider.html5Mode(true);

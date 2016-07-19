@@ -8,12 +8,20 @@
               <a ui-sref="datasets.all.map">All datasets</a>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" ng-show="$state.includes('datasets.all')">
             <li class="display-toggle" ui-sref-active="active">
               <a ui-sref="datasets.all.map">Map</a>
             </li>
             <li class="display-toggle" ui-sref-active="active">
               <a ui-sref="datasets.all.list">List</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right" ng-show="$state.includes('datasets.info')">
+            <li class="display-toggle" ui-sref-active="active">
+              <a ui-sref="datasets.info.map">Map</a>
+            </li>
+            <li class="display-toggle" ui-sref-active="active">
+              <a ui-sref="datasets.info.info">Info</a>
             </li>
           </ul>
         </div>
