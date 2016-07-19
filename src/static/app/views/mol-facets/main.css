@@ -1,0 +1,60 @@
+.mol-facets .dataset-count {
+  font-size: x-small;
+  float: right;
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+.mol-facets a.badge {
+  background-color: white;
+  color: black;
+  border: 1px solid gray;
+  font-weight: bolder;
+  white-space: normal;
+  padding: 4px 8px;
+  margin: 0 2px 4px 0;
+}
+
+.mol-facets a.badge:hover {
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.mol-facets a.badge i.unselect {
+  color: gray;
+}
+
+.mol-facets .fa-times.unselect-all {
+  margin-right: 8px;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.mol-facets .fa-times.unselect-all:hover {
+  background-color: lightgray;
+}
+
+.mol-facets .clear-all {
+  margin-top: 12px;
+}
+
+.mol-facets .clear-all a {
+  color: gray;
+  padding: 4px 8px;
+}
+
+.mol-facets .clear-all:hover a {
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: black;
+}
+
+.mol-facets .nothing-selected {
+  color: gray;
+}
+
+.mol-facets > div {
+  margin-bottom: 20px;
+}

@@ -1,3 +1,7 @@
+html {
+  height: auto;
+}
+
 body {
   display: -webkit-flex;
   display: flex;
@@ -14,91 +18,6 @@ body {
   -webkit-flex-direction: column;
 }
 
-.sidebar-container {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex: 1;
-    flex: 1;
-}
-
-.navigation .tile-toggle {
-  white-space: nowrap;
-}
-
-.sidebar {
-    position: relative;
-    max-width: 320px;
-    min-width: 320px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-right: 2pt solid gray;
-}
-
-.sidebar .dataset-count {
-  font-size: x-small;
-  float: right;
-  margin-top: 4px;
-  margin-right: 4px;
-}
-
-html {
-  height: auto;
-}
-
-.sidebar a.badge {
-  background-color: white;
-  color: black;
-  border: 1px solid gray;
-  font-weight: bolder;
-  white-space: normal;
-  padding: 4px 8px;
-  margin: 0 2px 4px 0;
-}
-
-.sidebar a.badge:hover {
-  background-color: lightgray;
-  border: 1px solid gray;
-  border-radius: 10px;
-}
-
-.sidebar a.badge i.unselect {
-  color: gray;
-}
-
-.sidebar .fa-times.unselect-all {
-  margin-right: 8px;
-  padding: 0 4px;
-  border-radius: 4px;
-}
-
-.sidebar .fa-times.unselect-all:hover {
-  background-color: lightgray;
-}
-
-.sidebar .clear-all {
-  margin-top: 12px;
-}
-
-.sidebar .clear-all a {
-  color: gray;
-  padding: 4px 8px;
-}
-
-.sidebar .clear-all:hover a {
-  background-color: lightgray;
-  border: 1px solid black;
-  border-radius: 10px;
-  color: black;
-}
-
-.sidebar .nothing-selected {
-  color: gray;
-}
-
-.mol-facets > div {
-  margin-bottom: 20px;
-}
-
 .navbar-nav {
   margin: 0;
 }
@@ -107,8 +26,6 @@ html {
   width: 124px;
 }
 
-/* map with lefthand sidebar */
-
 .layouts-sidebar {
   -webkit-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -116,6 +33,13 @@ html {
   display: flex;
   position: relative;
   align-items: stretch;
+}
+
+.sidebar-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    flex: 1;
 }
 
 .sidebar-scroll-container {
@@ -127,6 +51,7 @@ html {
   overflow-y: auto;
   transition: all 0.7s ease;
 }
+
 .sidebar-scroll-container.closed {
   min-width: 0;
   max-width: 0;
@@ -159,7 +84,8 @@ html {
   transition: all 0.7s ease;
 }
 
-.layouts-sidebar .sidebar {
+.sidebar {
+  position: relative;
   top: 0px;
   bottom: 0px;
   left: 0px;
@@ -169,6 +95,11 @@ html {
   padding: 15px;
   width: 400px;
   max-width: 100%;
+  max-width: 320px;
+  min-width: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 2pt solid gray;
 }
 
 .layouts-sidebar .map-container {

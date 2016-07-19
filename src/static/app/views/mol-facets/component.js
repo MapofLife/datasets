@@ -2,7 +2,7 @@ angular.module('mol.facets', [])
   .directive('molFacets', [function() {
     return {
       restrict: 'E',
-      templateUrl: 'static/app/views/mol-facets/partials/mol-facets.html',
+      templateUrl: 'static/app/views/mol-facets/mol-facets.html',
       scope: {
         facets: '=',
         choices: '='
