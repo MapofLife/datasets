@@ -20,7 +20,6 @@ angular.module('mol.datasets', [
 .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.includeBar = false;
-    //cfpLoadingBarProvider.includeBar = false;
     cfpLoadingBarProvider.latencyThreshold = 500;
   }])
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
@@ -36,7 +35,7 @@ angular.module('mol.datasets', [
     'http*://api.mol.org/1.0/datasets/**',
     'http*://mapoflife.github.io/**',
   ]);
-  $urlRouterProvider.otherwise('map');
+  $urlRouterProvider.otherwise('/');
   $stateProvider
     .state(
       'datasets', {
@@ -89,6 +88,20 @@ angular.module('mol.datasets', [
       }
     )
     .state(
+      'datasets.all.both', {
+        views: {
+          'map@datasets.all': {
+            templateUrl: 'static/app/views/map/main.html',
+            controller: 'molDatasetsMapCtrl'
+          },
+          'info-pane@datasets.all': {
+            templateUrl: 'static/app/views/table/main.html'
+          }
+        },
+        url: ''
+      }
+    )
+    .state(
       'datasets.info', {
         abstract: true,
         title: 'Dataset Info',
@@ -123,6 +136,21 @@ angular.module('mol.datasets', [
           }
         },
         url: '/info'
+      }
+    )
+    .state(
+      'datasets.info.both', {
+        views: {
+          'map@datasets.info': {
+            templateUrl: 'static/app/views/map/main.html',
+            controller: 'molDatasetsMapCtrl'
+          },
+          'info-pane@datasets.info': {
+            templateUrl: 'static/app/views/info/info.html',
+            controller: 'molDatasetsInfoCtrl'
+          }
+        },
+        url: ''
       }
     );
     $locationProvider.html5Mode(true);

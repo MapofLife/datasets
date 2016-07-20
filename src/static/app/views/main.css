@@ -18,12 +18,12 @@ body {
   -webkit-flex-direction: column;
 }
 
-.navbar-nav {
-  margin: 0;
+.display-toggle {
+  padding-top: 8px;
 }
 
-.navbar-nav li {
-  width: 124px;
+.navbar-nav .display-toggle li {
+  background-color: #fff;
 }
 
 .layouts-sidebar {
