@@ -3,6 +3,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
@@ -33,6 +34,7 @@ body {
   display: flex;
   position: relative;
   align-items: stretch;
+  padding-bottom: 20px;
 }
 
 .sidebar-container {
