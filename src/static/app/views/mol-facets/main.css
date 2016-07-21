@@ -58,3 +58,15 @@
 .mol-facets > div {
   margin-bottom: 20px;
 }
+
+.visible-parts a,
+.visible-parts a:visited {
+  color: white;
+}
+
+.visible-parts a:hover,
+.visible-parts a:active,
+.visible-parts a:focus
+{
+  background-color: #286090;
+}
