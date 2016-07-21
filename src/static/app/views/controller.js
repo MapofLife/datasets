@@ -1,15 +1,16 @@
 angular.module('mol.controllers')
-  .controller('molDatasetsCtrl', ['$scope', 'molApi','$stateParams','$rootScope','$state',
-    function($scope, molApi,$stateParams, $rootScope,$state) {
+  .controller('molDatasetsCtrl', ['$scope', 'molApi', '$stateParams', '$rootScope', '$state',
+    function($scope, molApi, $stateParams, $rootScope, $state) {
 
   $rootScope.$state = $state;
   $scope.model = {
       choices: {},
-      facets: {fields:[],rows:[]}
+      facets: { fields:[], rows:[] },
+      filterByIds: []
   };
 
   $scope.initialize = function() {
-    molApi({"service":"inventory/datasets", "loading":true}).then(function(response) {
+    molApi({service: 'inventory/datasets', loading: true}).then(function(response) {
       $scope.model.facets = response.data;
     });
   };

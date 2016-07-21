@@ -5,7 +5,8 @@ angular.module('mol.facets', [])
       templateUrl: 'static/app/views/mol-facets/mol-facets.html',
       scope: {
         facets: '=',
-        choices: '='
+        choices: '=',
+        filterByIds: '='
       },
       link: function(scope) {
         scope.$watch('facets', scope.updateValuesToLabels);

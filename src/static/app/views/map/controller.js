@@ -1,6 +1,6 @@
 angular.module('mol.controllers').controller('molDatasetsMapCtrl',
-    ['$scope', 'leafletData', 'leafletBoundsHelpers', '$timeout', '$window', '$http', '$filter', 'molApi', '$q', '$state',
-    function($scope, leafletData, leafletBoundsHelpers, $timeout, $window, $http, $filter, molApi, $q, $state) {
+    ['$scope', 'leafletData', 'leafletBoundsHelpers', '$timeout', '$window', '$http', '$filter', 'molApi', '$q', '$state', 'leafletMapEvents',
+    function($scope, leafletData, leafletBoundsHelpers, $timeout, $window, $http, $filter, molApi, $q, $state, leafletMapEvents) {
 
   $scope.$watch('model.choices', function() {
     $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
@@ -10,19 +10,12 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.map = {
     center: { lat: 0, lng: 0, zoom: 3 },
-    extent: leafletBoundsHelpers.createBoundsFromArray([
-      [90,180],[-90,-180]
-    ]),
+    extent: leafletBoundsHelpers.createBoundsFromArray([[90, 180], [-90, -180]]),
+    controls: { fullscreen: { position: 'topright' }},
     events: { map: { enable: ['click'], logic: 'emit' } },
+    defaults: { minZoom: 2 },
     bounds: {},
-    controls: {
-      fullscreen: {
-        position: 'topright'
-      }
-    },
-    defaults: {
-      minZoom: 2
-    },
+    legend: {},
     layers: {
       baselayers: {
         xyz: {
@@ -32,16 +25,30 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         }
       }
     },
-    legend: {},
   };
 
   $scope.canceller = $q.defer();
+
+  $scope.$on('leafletDirectiveMap.moveend', function(event) {
+    leafletData.getMap().then(function(map) {
+      var bbox = map.getBounds();
+      molApi({
+        service: 'inventory/bbox',
+        processing: true,
+        params: { coords: [bbox._northEast.lng, bbox._northEast.lat, bbox._southWest.lng, bbox._southWest.lat].join(',') }
+      }).then(function(response) {
+        $scope.model.filterByIds = response.data.dataset_id;
+      });
+    });
+  });
 
   $scope.datasetsQuery = function() {
     var payload = {};
     Object.keys($scope.model.choices).forEach(function (facet) {
       var choices = $scope.model.choices[facet];
-      payload[facet] = Object.keys(choices).filter(function(choice) {return choices[choice]} ).join(',').toLowerCase() || '';
+      payload[facet] = Object.keys(choices).filter(function(choice) {
+        return choices[choice]
+      }).join(',').toLowerCase() || '';
     });
 
     if ($state.params.dataset) {
