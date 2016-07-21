@@ -7,10 +7,10 @@
             <li ui-sref-options="{inherit:true}" ui-sref-active="active">
               <a ui-sref="datasets.all.map">All datasets</a>
             </li>
-            <li class="display-toggle">
+            <li class="display-toggle" ng-show="$state.includes('datasets.info')">
               <div class="btn-group" uib-dropdown is-open="status.isopen">
                 <button type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
-                  Show
+                  View Mode
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.all')">
@@ -23,7 +23,7 @@
                   <li><a ui-sref="datasets.info.info">Info Only</a></li>
                   <li><a ui-sref="datasets.info.both">Everything</a></li>
                 </ul>
-            </div>
+              </div>
             </li>
           </ul>
         </div>
