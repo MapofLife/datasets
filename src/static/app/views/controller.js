@@ -12,6 +12,7 @@ angular.module('mol.controllers')
   $scope.initialize = function() {
     molApi({service: 'inventory/datasets', loading: true}).then(function(response) {
       $scope.model.facets = response.data;
+      console.log(response.data);
     });
   };
 
@@ -32,6 +33,16 @@ angular.module('mol.controllers')
       $scope.sortColumn = i;
       $scope.reverse = false;
     }
+  };
+
+  $scope.sortComparator = function(a, b) {
+    var aa = a.value,
+        bb = b.value,
+        type = $scope.model.facets.fields[$scope.sortColumn].type;
+    if (type == 'number') {
+      return +aa > +bb ? 1: (+aa < +bb ? -1 : 0);
+    }
+    return aa > bb ? 1 : (aa < bb ? -1 : 0);
   };
 
   $scope.columnValue = function(row) {
