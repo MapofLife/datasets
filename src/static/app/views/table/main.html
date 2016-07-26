@@ -14,8 +14,13 @@
       <tr ui-sref="datasets.info.both({dataset: getValue(row, 'dataset_id')})" ui-sref-options="{reload:true}" class="clickable"
         ng-repeat="row in model.facets.rows | withfilterByIds:model.filterByIds:model.facets
                   | choiceFilter:model.choices:model.facets | orderBy:columnValue:reverse:sortComparator">
-        <td ng-repeat="cell in row">
-          <div ng-repeat="content in cell" ng-bind-html="content.title"></div>
+        <td ng-repeat="cell in row track by $index">
+          <div ng-if="model.facets.fields[$index].type == 'number'">
+            <div class="text-right" ng-repeat="content in cell" ng-bind="content.value | number"></div>
+          </div>
+          <div ng-if="model.facets.fields[$index].type != 'number'">
+            <div ng-repeat="content in cell" ng-bind-html="content.title"></div>
+          </div>
         </td>
       </tr>
     </tbody>

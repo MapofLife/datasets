@@ -12,7 +12,6 @@ angular.module('mol.controllers')
   $scope.initialize = function() {
     molApi({service: 'inventory/datasets', loading: true}).then(function(response) {
       $scope.model.facets = response.data;
-      console.log(response.data);
     });
   };
 
