@@ -63,9 +63,9 @@ body {
 }
 
 .sidebar-toggle {
-  position: absolute;
-  top: 72px;
-  left: 320px;
+  position: fixed;
+  top: 50vh;
+  left: 318px;
   z-index:  1000;
   width: 40px;
   height: 40px;
