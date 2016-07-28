@@ -11,6 +11,11 @@ body {
   -webkit-flex-direction: column;
 }
 
+.layouts-base {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
 .main {
   display: -webkit-flex;
   display: flex;
