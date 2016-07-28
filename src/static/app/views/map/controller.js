@@ -29,6 +29,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.canceller = $q.defer();
 
+  /*
   $scope.$on('leafletDirectiveMap.moveend', function(event) {
     leafletData.getMap().then(function(map) {
       var bbox = map.getBounds();
@@ -41,6 +42,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       });
     });
   });
+  */
 
   $scope.datasetsQuery = function() {
     var payload = {};
@@ -89,6 +91,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         high: i > legendData.bins.length - 1 ? 'and over' : legendData.bins[i],
         color: curr
       };
+      if (item.low > item.high) { item.low = item.high; }
       if (!used[item.high]) {
         used[item.high] = true;
         prev.push(item);
