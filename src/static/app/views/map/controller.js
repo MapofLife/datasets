@@ -29,21 +29,6 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.canceller = $q.defer();
 
-  /*
-  $scope.$on('leafletDirectiveMap.moveend', function(event) {
-    leafletData.getMap().then(function(map) {
-      var bbox = map.getBounds();
-      molApi({
-        service: 'inventory/bbox',
-        processing: true,
-        params: { coords: [bbox._northEast.lng, bbox._northEast.lat, bbox._southWest.lng, bbox._southWest.lat].join(',') }
-      }).then(function(response) {
-        $scope.model.filterByIds = response.data.dataset_id;
-      });
-    });
-  });
-  */
-
   $scope.datasetsQuery = function() {
     var payload = {};
     Object.keys($scope.model.choices).forEach(function (facet) {
@@ -69,6 +54,11 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         response.data.extent.coordinates[0][2].reverse(),
         response.data.extent.coordinates[0][0].reverse()
       ]);
+      var padding = 5;
+      $scope.map.bounds.northEast.lat += padding;
+      $scope.map.bounds.northEast.lng += padding;
+      $scope.map.bounds.southWest.lat -= padding;
+      $scope.map.bounds.southWest.lng -= padding;
       $scope.map.layers.overlays = {
         xyz: {
           name: 'Datasets',
