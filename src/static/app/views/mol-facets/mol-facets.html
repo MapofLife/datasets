@@ -1,17 +1,17 @@
 <div class="mol-facets">
   <div class="visible-parts">
-    <h4 class="left">View Mode</h4>
-    <div class="btn-group">
-      <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Map'">
+    <span class="left h4">View Mode</span>
+    <span class="btn-group pull-right">
+      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Map'">
         <a ui-sref="datasets.all.map">Map Only</a>
       </label>
-      <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'List'">
+      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'List'">
         <a ui-sref="datasets.all.list">List Only</a>
       </label>
-      <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Both'">
+      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Both'">
         <a ui-sref="datasets.all.both">Everything</a>
       </label>
-    </div>
+    </span>
   </div>
   <hr />
   <div class="selected-options">

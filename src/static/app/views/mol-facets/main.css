@@ -59,6 +59,10 @@
   margin-bottom: 20px;
 }
 
+.visible-parts {
+  margin: 10px 0;
+}
+
 .visible-parts a,
 .visible-parts a:visited {
   color: white;
@@ -69,4 +73,9 @@
 .visible-parts a:focus
 {
   background-color: #286090;
+}
+
+.visible-parts .h4 {
+  font-size: 18px;
+  line-height: 24px;
 }
