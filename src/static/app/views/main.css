@@ -71,7 +71,7 @@ body {
 .sidebar-toggle {
   position: fixed;
   top: 50vh;
-  left: 318px;
+  left: 278px;
   z-index:  1000;
   width: 40px;
   height: 40px;
@@ -101,10 +101,9 @@ body {
   background-color: white;
   font-size: 10pt;
   padding: 15px;
-  width: 400px;
   max-width: 100%;
-  max-width: 320px;
-  min-width: 320px;
+  max-width: 280px;
+  min-width: 280px;
   overflow-y: auto;
   overflow-x: hidden;
   border-right: 2pt solid gray;

@@ -19,8 +19,8 @@
 
 .layouts-sidebar .sidebar-scroll-container {
       position: relative;
-      max-width: 320px;
-      min-width: 320px;
+      max-width: 280px;
+      min-width: 280px;
       overflow-y: auto;
       overflow-x: hidden;
       border-right: 2pt solid gray;
