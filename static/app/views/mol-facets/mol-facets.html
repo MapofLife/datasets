@@ -1,6 +1,6 @@
 <div class="mol-facets">
   <div class="visible-parts">
-    <span class="left h4">View Mode</span>
+    <h5 class="left">View Mode</h5>
     <span class="btn-group pull-right">
       <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Map'">
         <a ui-sref="datasets.all.map">Map Only</a>
@@ -16,10 +16,10 @@
   <hr />
   <div class="selected-options">
     <div>
-      <h4 class="left">
+      <h5 class="left">
         Selected Options
         <span class="dataset-count">Selected Datasets: {{(facets.rows | choiceFilter:choices:facets).length | number: 0}}</span>
-      </h4>
+      </h5>
     </div>
     <span ng-repeat="badge in badges">
       <a class="badge" href="#" ng-show="choices[badge.facet][badge.value]" ng-click="choices[badge.facet][badge.value] = false">
@@ -42,7 +42,7 @@
       <i class="pull-right clickable fa fa-times unselect-all"
         ng-show="facetBadges[field.value].length" ng-click="choices[field.value] = {}">
       </i>
-      <h4 class="left">{{field.title}}</h4>
+      <h5 class="left">{{field.title}}</h5>
     </div>
     <div class="col-xs-offset-1" uib-collapse="c"
         ng-repeat="(value, group) in options = (facets.rows | choiceFilter:choices:facets:field.value
