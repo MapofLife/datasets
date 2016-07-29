@@ -9,6 +9,7 @@ angular.module('mol.datasets', [
   'angular.filter',
   'ngResource',
   'ngSanitize',
+  'ngCookies',
   'ngAnimate',
   'ui.bootstrap',
   'mol.facets',
@@ -24,6 +25,7 @@ angular.module('mol.datasets', [
   }])
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
             function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
+  $httpProvider.defaults.useXDomain = true;
   $httpProvider.defaults.withCredentials = false;
   $locationProvider.html5Mode(true);
   $sceDelegateProvider.resourceUrlWhitelist([

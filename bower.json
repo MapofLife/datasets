@@ -39,11 +39,12 @@
     "tests"
   ],
   "resolutions": {
-    "angular": "~1.5.5",
+    "angular": "1.5.7",
     "angular-simple-logger": "~0.1.4"
   },
   "dependencies": {
     "angular-animate": "^1.5.7",
-    "Leaflet.fullscreen": "Leaflet/Leaflet.fullscreen#^1.0.1"
+    "Leaflet.fullscreen": "Leaflet/Leaflet.fullscreen#^1.0.1",
+    "angular-cookies": "^1.5.8"
   }
 }
