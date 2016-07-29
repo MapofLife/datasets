@@ -20,7 +20,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       baselayers: {
         xyz: {
           name: 'OpenStreetMap (XYZ)',
-          url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          url: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           type: 'xyz'
         }
       }
