@@ -1,8 +1,6 @@
 .angular-leaflet-map {
-        height:400px;
+        height:480px;
         width:800px;
-        /*-webkit-flex: 1;
-        flex: 1;*/
 }
 
 .leaflet-control-layers {
