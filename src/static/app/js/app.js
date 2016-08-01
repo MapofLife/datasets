@@ -26,18 +26,16 @@ angular.module('mol.datasets', [
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
             function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
   $httpProvider.defaults.useXDomain = true;
-  $httpProvider.defaults.withCredentials = true;
+  $httpProvider.defaults.withCredentials = false;
   $locationProvider.html5Mode(true);
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
     'http:*//localhost**',
     'http*://127.0.0.1:9001/**',
-    'http://mol.org',
-    'https://mol.org',
+    'http*://*mol.org/**',
     'http*://api.mol.org/1.0/datasets/**',
     'http*://api.mol.org/1.0/datasets/**',
-    'http://mapoflife.github.io/**',
-    'https://mapoflife.github.io/**',
+    'http*://mapoflife.github.io/**',
   ]);
   $urlRouterProvider.otherwise('/');
   $stateProvider
