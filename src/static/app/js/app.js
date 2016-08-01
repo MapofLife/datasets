@@ -26,7 +26,7 @@ angular.module('mol.datasets', [
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
             function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
   $httpProvider.defaults.useXDomain = true;
-  $httpProvider.defaults.withCredentials = false;
+  $httpProvider.defaults.withCredentials = true;
   $locationProvider.html5Mode(true);
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
