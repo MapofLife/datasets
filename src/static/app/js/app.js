@@ -33,6 +33,8 @@ angular.module('mol.datasets', [
     'http:*//localhost**',
     'http*://127.0.0.1:9001/**',
     'http*://*mol.org/**',
+    'http://mol.org/**',
+    'https://mol.org/**',
     'http*://api.mol.org/1.0/datasets/**',
     'http*://api.mol.org/1.0/datasets/**',
     'http*://mapoflife.github.io/**',
