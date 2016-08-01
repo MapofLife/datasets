@@ -1,33 +1,27 @@
-<div class="navigation">
-  <div class="container-fluid">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div>
-          <ul class="nav navbar-nav">
-            <li ui-sref-options="{inherit:true}" ui-sref-active="active">
-              <a ui-sref="datasets.all.both">All datasets</a>
-            </li>
-            <li class="display-toggle" ng-show="$state.includes('datasets.info')">
-              <div class="btn-group" uib-dropdown is-open="status.isopen">
-                <button type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
-                  View Mode
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.all')">
-                  <li><a ui-sref="datasets.all.map">Map Only</a></li>
-                  <li><a ui-sref="datasets.all.list">List Only</a></li>
-                  <li><a ui-sref="datasets.all.both">Both</a></li>
-                </ul>
-                <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.info')">
-                  <li><a ui-sref="datasets.info.map">Map Only</a></li>
-                  <li><a ui-sref="datasets.info.info">Info Only</a></li>
-                  <li><a ui-sref="datasets.info.both">Both</a></li>
-                </ul>
-              </div>
-            </li>
+<div class="navigation container-fluid dataset-navigation">
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li ui-sref-options="{inherit:true}" ui-sref-active="active">
+        <a ui-sref="datasets.all.both">All datasets</a>
+      </li>
+      <li class="display-toggle" ng-show="$state.includes('datasets.info')">
+        <div class="btn-group" uib-dropdown is-open="status.isopen">
+          <button type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+            View Mode
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.all')">
+            <li><a ui-sref="datasets.all.map">Map Only</a></li>
+            <li><a ui-sref="datasets.all.list">List Only</a></li>
+            <li><a ui-sref="datasets.all.both">Both</a></li>
+          </ul>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.info')">
+            <li><a ui-sref="datasets.info.map">Map Only</a></li>
+            <li><a ui-sref="datasets.info.info">Info Only</a></li>
+            <li><a ui-sref="datasets.info.both">Both</a></li>
           </ul>
         </div>
-      </div>
-    </nav>
-  </div>
+      </li>
+    </ul>
+  </nav>
 </div>
