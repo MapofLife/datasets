@@ -11,6 +11,23 @@ body {
   -webkit-flex-direction: column;
 }
 
+.navigation.dataset-navigation .nav {
+  margin: 0;
+}
+.navigation.dataset-navigation .nav > li {
+  display: inline;
+  float: left;
+  margin-right: 8px;
+}
+.navigation.dataset-navigation .navbar-nav .dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 160px;
+  float: left;
+  z-index: 1500;
+}
+
 .layouts-base {
   overflow-x: auto;
   overflow-y: auto;
