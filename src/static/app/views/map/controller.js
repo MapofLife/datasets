@@ -50,15 +50,11 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       canceller: $scope.canceller,
       processing: true
     }).then(function(response) {
-      $scope.map.bounds = leafletBoundsHelpers.createBoundsFromArray([
-        response.data.extent.coordinates[0][2].reverse(),
-        response.data.extent.coordinates[0][0].reverse()
-      ]);
       var padding = 5;
-      $scope.map.bounds.northEast.lat += padding;
-      $scope.map.bounds.northEast.lng += padding;
-      $scope.map.bounds.southWest.lat -= padding;
-      $scope.map.bounds.southWest.lng -= padding;
+      $scope.map.bounds = leafletBoundsHelpers.createBoundsFromArray([
+        [response.data.extent.coordinates[0][2][1] + padding, response.data.extent.coordinates[0][2][0] + padding],
+        [response.data.extent.coordinates[0][0][1] - padding, response.data.extent.coordinates[0][0][0] - padding]
+      ]);
       $scope.map.layers.overlays = {
         xyz: {
           name: 'Datasets',
