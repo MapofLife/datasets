@@ -36,7 +36,8 @@ angular.module('mol.datasets', [
     'https://mol.org',
     'http*://api.mol.org/1.0/datasets/**',
     'http*://api.mol.org/1.0/datasets/**',
-    'http*://mapoflife.github.io/**',
+    'http://mapoflife.github.io/**',
+    'https://mapoflife.github.io/**',
   ]);
   $urlRouterProvider.otherwise('/');
   $stateProvider
