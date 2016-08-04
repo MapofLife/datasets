@@ -2,14 +2,14 @@
   <div class="visible-parts">
     <h5 class="left">View Mode</h5>
     <span class="btn-group pull-right">
-      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Map'">
-        <a ui-sref="datasets.all.map">Map Only</a>
+      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Map'" ui-sref="datasets.all.map" ui-sref-active="active">
+        Map Only
       </label>
-      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'List'">
-        <a ui-sref="datasets.all.list">List Only</a>
+      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'List'" ui-sref="datasets.all.list" ui-sref-active="active">
+        List Only
       </label>
-      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Both'">
-        <a ui-sref="datasets.all.both">Both</a>
+      <label class="btn btn-primary btn-xs" ng-model="radioModel" uib-btn-radio="'Both'" ui-sref="datasets.all.both" ui-sref-active="active">
+        Both
       </label>
     </span>
   </div>
