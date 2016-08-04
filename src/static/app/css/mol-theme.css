@@ -22,21 +22,21 @@ body {
    width: initial;
    height: initial;
  }
+
 header {
 	margin: 0;
 	padding: 0;
 	position: relative;
-	overflow: hidden;
 }
+
 body, caption, th, td, input, textarea, select, option, legend, fieldset {
 	font-family: "Fira Sans","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 }
+
 .logo {
 	margin: 0.5em;
 	width: 10em
 }
-
-
 
 .login {
   float: right;
@@ -77,12 +77,6 @@ body, caption, th, td, input, textarea, select, option, legend, fieldset {
 	}
 }
 
-.list-group-item .active {
-
-}
-
-
-
 .menu li {
 	list-style: none;
 	list-style-image: none;
@@ -91,7 +85,6 @@ body, caption, th, td, input, textarea, select, option, legend, fieldset {
 	*zoom: 1;
 	margin: 0
 }
-
 
 .menu a:link, .menu a:visited {
 	color: #3d3c3c;
@@ -148,7 +141,6 @@ body, caption, th, td, input, textarea, select, option, legend, fieldset {
 	padding: 6px 6px;
 }
 
-.
 .bootstrap-switch {
     height: 1.4em;
     min-width: 3em;
