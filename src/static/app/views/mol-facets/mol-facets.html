@@ -17,8 +17,14 @@
   <div class="selected-options">
     <div>
       <h5 class="left">
-        Selected Options
-        <span class="dataset-count">Selected Datasets: {{(facets.rows | choiceFilter:choices:facets).length | number: 0}}</span>
+        Filters
+        <span class="clear-all">
+          <a href="#" ng-click="clear()" ng-show="badges.length" class="badge" >
+            Clear all
+            <i class="clickable fa fa-times"></i>
+          </a>
+        </span>
+        <span class="dataset-count">Datasets: {{(facets.rows | choiceFilter:choices:facets).length | number: 0}}</span>
       </h5>
     </div>
     <span ng-repeat="badge in badges">
@@ -28,12 +34,6 @@
       </a>
     </span>
     <span class="nothing-selected" ng-show="!badges.length">Select items to filter below</span>
-    <div class="clear-all">
-      <a href="#" ng-click="clear()" ng-show="badges.length">
-        <i class="clickable fa fa-times"></i>
-        Clear all search parameters
-      </a>
-    </div>
   </div>
   <div ng-repeat="field in facets.fields | filter: {facet: true} track by $index" is-open="status.open">
     <hr />

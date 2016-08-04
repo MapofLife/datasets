@@ -36,19 +36,7 @@
 }
 
 .mol-facets .clear-all {
-  margin-top: 2px;
-}
-
-.mol-facets .clear-all a {
-  color: gray;
-  padding: 2px 4px;
-}
-
-.mol-facets .clear-all:hover a {
-  background-color: lightgray;
-  border: 1px solid black;
-  border-radius: 10px;
-  color: black;
+  margin-left: 8px;
 }
 
 .mol-facets .nothing-selected {

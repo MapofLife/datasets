@@ -5,6 +5,21 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   $scope.map = datasetsMap;
   $scope.canceller = $q.defer();
 
+  // $scope.overlays = {
+  //   'Dataset Counts': {
+  //     property: 'dataset_id',
+  //     reducer: 'count',
+  //   },
+  //   'Species Counts': {
+  //     property: 'richness',
+  //     reducer: 'max'
+  //   },
+  //   'Record Counts': {
+  //     property: 'no_records',
+  //     reducer: 'sum',
+  //   },
+  // };
+
   $scope.$watch('model.choices', function() {
     $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
     $scope.map.layers.overlays = {};
@@ -17,26 +32,25 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   };
 
   $scope.datasetsQuery = function() {
-    var name, payload1 = {};
-
     $scope.canceller.resolve();
     $scope.canceller = $q.defer();
 
+    var name, payload1 = {};
     if ($state.params.dataset) {
+      name = 'Species Counts';
       if (!$scope.overlay || $scope.overlay == 'Dataset Counts') {
         $scope.showOverlay(name);
       }
-      name = 'Species Counts';
       payload1 = {
         dataset_id: $state.params.dataset,
         property: 'richness',
         reducer: 'max'
       };
     } else {
+      name = 'Dataset Counts';
       if (!$scope.overlay || $scope.overlay == 'Species Counts') {
         $scope.showOverlay(name);
       }
-      name = 'Dataset Counts';
       payload1.property = 'dataset_id';
       payload1.reducer = 'count';
       Object.keys($scope.model.choices).forEach(function (facet) {
@@ -46,12 +60,11 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         }).join(',').toLowerCase() || '';
       });
     }
-    $scope.getLayer(payload1, name, true);
+    $scope.getLayer(payload1, name, $scope.overlay == name);
 
+    name = 'Record Counts';
     var payload2 = Object.assign({}, payload1);
-    payload2.property = 'no_records';
-    payload2.reducer = 'sum';
-    $scope.getLayer(payload2, 'Record Counts', false);
+    $scope.getLayer(payload2, name,  $scope.overlay == name);
   };
 
   $scope.getLayer = function(payload, name, active) {
