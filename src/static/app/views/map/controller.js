@@ -142,10 +142,6 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       }
       legend.colors.push(item.color);
     });
-    if (legend.labels.length == 2) {
-      legend.labels = legend.labels.slice(0, 1);
-      legend.colors = legend.colors.slice(0, 1);
-    }
     return legend;
   };
 
