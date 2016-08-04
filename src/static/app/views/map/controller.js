@@ -26,14 +26,16 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       name = 'Species Counts';
       payload = {
         dataset_id: $state.params.dataset,
-        property: 'no_species',
-        reducer: 'sum'
+        property: 'richness',
+        reducer: 'max'
       };
       if (!$scope.layer || $scope.layer == 'Dataset Counts') {
         $scope.showOverlay(name);
       }
     } else {
       name = 'Dataset Counts';
+      payload.property = 'dataset_id';
+      payload.reducer = 'count';
       Object.keys($scope.model.choices).forEach(function (facet) {
         var choices = $scope.model.choices[facet];
         payload[facet] = Object.keys(choices).filter(function(choice) {
