@@ -3,12 +3,7 @@
         width:800px;
 }
 
-.leaflet-control-layers {
-  display:none;
-}
-
-.legend::before {
-  content: "Number of Datasets";
+.legend:before {
   font-weight: bold;
   text-decoration: underline;
   text-align: center;
@@ -35,4 +30,10 @@
   float: left;
   margin-right: 4px;
   opacity: 0.7;
+}
+
+.datasets-map-container > label {
+  float: right;
+  padding-left: 12px;
+  font: 12px/14px Arial, Helvetica, sans-serif;
 }
