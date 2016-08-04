@@ -37,9 +37,11 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     if (overlay) {
       $scope.overlay = overlay;
     }
+    $scope.setLegend($scope.overlay);
     Object.keys($scope.map.legends).forEach(function(name) {
-      $scope.setLegend($scope.overlay);
-      $scope.map.layers.overlays[name].visible = name == $scope.overlay;
+      if ($scope.map.layers.overlays[name]) {
+        $scope.map.layers.overlays[name].visible = name == $scope.overlay;
+      }
     });
   };
 
