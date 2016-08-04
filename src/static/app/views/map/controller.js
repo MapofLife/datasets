@@ -97,8 +97,8 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         doRefresh: true,
         visible: active,
         url: response.data.tile_url,
-        // layerParams: { showOnSelector: false },
-        // layerOptions: { showOnSelector: false },
+        layerParams: { showOnSelector: false },
+        layerOptions: { showOnSelector: false },
       };
     });
   };
