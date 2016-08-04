@@ -1,16 +1,15 @@
 angular.module('mol.controllers').controller('molDatasetsMapCtrl',
-    ['$scope', '$timeout', '$window', '$http', '$filter', 'molApi', '$q', '$state', 'leafletMapEvents', 'datasetsMap',
-    function($scope, $timeout, $window, $http, $filter, molApi, $q, $state, leafletMapEvents, datasetsMap) {
+    ['$scope', '$timeout', '$q', '$state', 'molApi', 'datasetsMap',
+    function($scope, $timeout, $q, $state, molApi, datasetsMap) {
+
+  $scope.map = datasetsMap;
+  $scope.canceller = $q.defer();
 
   $scope.$watch('model.choices', function() {
     $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
     $scope.map.layers.overlays = {};
     $timeout($scope.datasetsQuery);
   }, true);
-
-  $scope.map = datasetsMap;
-
-  $scope.canceller = $q.defer();
 
   $scope.showOverlay = function(overlay) {
     $scope.overlay = overlay || $scope.overlay;

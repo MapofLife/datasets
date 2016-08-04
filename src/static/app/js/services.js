@@ -12,12 +12,14 @@ molServices.factory(
         center: { lat: 0, lng: 0, zoom: 3 },
         extent: leafletBoundsHelpers.createBoundsFromArray([[90, 180], [-90, -180]]),
         controls: { fullscreen: { position: 'topright' }},
+        timestamp: Date.now(),
         // events: { map: { enable: ['zoomstart', 'drag', 'click', 'mousemove'], logic: 'emit' } },
         defaults: { minZoom: 2 },
         bounds: {},
         legend: {},
         legends: {},
         layers: {
+          overlays: {},
           baselayers: {
             xyz: {
               name: 'OpenStreetMap (XYZ)',
@@ -27,9 +29,7 @@ molServices.factory(
               layerOptions: { showOnSelector: false },
             }
           },
-          overlays: {},
         },
-        timestamp: Date.now(),
 
         updateMapBounds: function(coordinates) {
           var padding = 5;
