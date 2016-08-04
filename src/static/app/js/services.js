@@ -39,12 +39,12 @@ molServices.factory(
           ]);
         },
 
-        setLegend: function(name) {
+        showLegend: function(name) {
           map.legend = map.legends[name];
           document.styleSheets[0].addRule('.legend:before', 'content: "' + name + '";');
         },
 
-        buildLegend: function(legendData) {
+        addLegend: function(legendData) {
           var legend = { position: 'bottomleft', labels: [], colors: [] };
           var used = {};
           legendData.colors.reduce(function(prev, curr, i) {
@@ -72,7 +72,7 @@ molServices.factory(
         },
 
         showOverlay: function(overlay) {
-          map.setLegend(overlay);
+          map.showLegend(overlay);
           Object.keys(map.legends).forEach(function(name) {
             if (map.layers.overlays[name]) {
               map.layers.overlays[name].visible = name == overlay;
@@ -81,9 +81,9 @@ molServices.factory(
         },
 
         addOverlay: function(name, url, active, legendData, coordinates) {
-          map.legends[name] = map.buildLegend(legendData);
+          map.legends[name] = map.addLegend(legendData);
           if (active) {
-            map.setLegend(name);
+            map.showLegend(name);
             map.updateMapBounds(coordinates);
           }
           map.layers.overlays[name] = {
