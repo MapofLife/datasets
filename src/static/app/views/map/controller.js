@@ -53,7 +53,6 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   };
 
   $scope.getLayer = function(payload, name, active) {
-    console.log($scope.map.timestamp);
     molApi({
       service: 'inventory/maps',
       params : payload,
