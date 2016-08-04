@@ -17,40 +17,41 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   };
 
   $scope.datasetsQuery = function() {
-    var name, payload = {};
+    var name, payload1 = {};
 
     $scope.canceller.resolve();
     $scope.canceller = $q.defer();
 
     if ($state.params.dataset) {
+      if (!$scope.overlay || $scope.overlay == 'Dataset Counts') {
+        $scope.showOverlay(name);
+      }
       name = 'Species Counts';
-      payload = {
+      payload1 = {
         dataset_id: $state.params.dataset,
         property: 'richness',
         reducer: 'max'
       };
-      if (!$scope.layer || $scope.layer == 'Dataset Counts') {
+    } else {
+      if (!$scope.overlay || $scope.overlay == 'Species Counts') {
         $scope.showOverlay(name);
       }
-    } else {
       name = 'Dataset Counts';
-      payload.property = 'dataset_id';
-      payload.reducer = 'count';
+      payload1.property = 'dataset_id';
+      payload1.reducer = 'count';
       Object.keys($scope.model.choices).forEach(function (facet) {
         var choices = $scope.model.choices[facet];
-        payload[facet] = Object.keys(choices).filter(function(choice) {
+        payload1[facet] = Object.keys(choices).filter(function(choice) {
           return choices[choice]
         }).join(',').toLowerCase() || '';
       });
-      if (!$scope.layer || $scope.layer == 'Species Counts') {
-        $scope.showOverlay(name);
-      }
     }
-    $scope.getLayer(payload, name, true);
+    $scope.getLayer(payload1, name, true);
 
-    payload.property = 'no_records';
-    payload.reducer = 'sum';
-    $scope.getLayer(payload, 'Record Counts', false);
+    var payload2 = Object.assign({}, payload1);
+    payload2.property = 'no_records';
+    payload2.reducer = 'sum';
+    $scope.getLayer(payload2, 'Record Counts', false);
   };
 
   $scope.getLayer = function(payload, name, active) {
@@ -60,7 +61,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       canceller: $scope.canceller,
       processing: true
     }).then(function(response) {
-      $scope.map.addOverlay(name, response.data.tile_url, active, response.data.legend, response.data.extent.coordinates);
+      $scope.map.addOverlay(name, active, response);
     });
   };
 

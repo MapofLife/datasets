@@ -80,25 +80,25 @@ molServices.factory(
           });
         },
 
-        addOverlay: function(name, url, active, legendData, coordinates) {
-          map.legends[name] = map.addLegend(legendData);
+        addOverlay: function(name, active, response) {
+          map.legends[name] = map.addLegend(response.data.legend);
           if (active) {
             map.showLegend(name);
-            map.updateMapBounds(coordinates);
+            map.updateMapBounds(response.data.extent.coordinates);
           }
           map.layers.overlays[name] = {
             name: name,
             type: 'xyz',
             doRefresh: true,
             visible: active,
-            url: url,
+            url: response.data.tile_url,
             layerParams: {
               opacity: 0.8,  // transparent: true,
-              showOnSelector: false
+              // showOnSelector: false
             },
             layerOptions: {
               opacity: 0.8,  // transparent: true,
-              showOnSelector: false
+              // showOnSelector: false
             },
           };
         },
