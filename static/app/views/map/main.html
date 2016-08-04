@@ -7,16 +7,15 @@
     legend="map.legend"
     controls="map.controls">
   </leaflet>
-  <label>
-    Record Counts:
-    <input type="radio" value="Record Counts" ng-model="overlay" ng-change="showOverlay()" />
-  </label>
-  <label ng-show="!$state.params.dataset">
-    Dataset Counts:
-    <input type="radio" value="Dataset Counts" ng-model="overlay" ng-change="showOverlay()" />
-  </label>
-  <label ng-show="$state.params.dataset">
-    Species Counts:
-    <input type="radio" value="Species Counts" ng-model="overlay"  ng-change="showOverlay()" />
-  </label>
+  <span class="btn-group pull-right">
+    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Dataset Counts'" ng-change="showOverlay()" ng-show="!$state.params.dataset">
+      Dataset Counts
+    </label>
+    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Species Counts'" ng-change="showOverlay()" ng-show="$state.params.dataset">
+      Species Counts
+    </label>
+    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Record Counts'" ng-change="showOverlay()">
+      Record Counts
+    </label>
+  </span>
 </div>
