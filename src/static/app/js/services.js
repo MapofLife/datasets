@@ -94,11 +94,11 @@ molServices.factory(
             url: response.data.tile_url,
             layerParams: {
               opacity: 0.8,  // transparent: true,
-              // showOnSelector: false
+              showOnSelector: false
             },
             layerOptions: {
               opacity: 0.8,  // transparent: true,
-              // showOnSelector: false
+              showOnSelector: false
             },
           };
         },
