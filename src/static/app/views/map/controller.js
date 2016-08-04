@@ -64,6 +64,8 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
     name = 'Record Counts';
     var payload2 = Object.assign({}, payload1);
+    payload2.property = 'no_records';
+    payload2.reducer = 'sum';
     $scope.getLayer(payload2, name,  $scope.overlay == name);
   };
 
