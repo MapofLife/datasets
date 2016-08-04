@@ -6,8 +6,8 @@ molServices.factory(
 	     return "0.x"
  	  }
   ]
-).factory('datasetsMap', [ 'leafletData', 'leafletBoundsHelpers', 'leafletMapEvents',
-  function(leafletData, leafletBoundsHelpers, leafletMapEvents) {
+).factory('datasetsMap', ['$filter', 'leafletData', 'leafletBoundsHelpers', 'leafletMapEvents',
+  function($filter, leafletData, leafletBoundsHelpers, leafletMapEvents) {
     var map = {
         center: { lat: 0, lng: 0, zoom: 3 },
         extent: leafletBoundsHelpers.createBoundsFromArray([[90, 180], [-90, -180]]),
@@ -46,7 +46,6 @@ molServices.factory(
 
         addLegend: function(legendData) {
           var legend = { position: 'bottomleft', labels: [], colors: [] };
-          var used = {};
           legendData.colors.reduce(function(prev, curr, i) {
             var item = {
               low: i ? legendData.bins[i-1] + 1 : 1,
@@ -54,17 +53,18 @@ molServices.factory(
               color: curr
             };
             if (item.low > item.high) { item.low = item.high; }
-            if (!used[item.high]) {
-              used[item.high] = true;
-              prev.push(item);
-            }
+            prev.push(item);
             return prev;
           }, []).forEach(function(item) {
+            var low = $filter('number')(item.low, 0);
             if (item.low == item.high) {
-              legend.labels.push('' + item.low);
+              legend.labels.push(low);
             } else {
-              var h = item.high;
-              legend.labels.push('' + item.low + (isNaN(h) ? ' ' + h : ' - ' + h));
+              if (isNaN(item.high)) {
+                legend.labels.push(low + ' ' + item.high);
+              } else {
+                legend.labels.push(low + ' - ' + $filter('number')(item.high, 0));
+              }
             }
             legend.colors.push(item.color);
           });
