@@ -5,20 +5,20 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   $scope.map = datasetsMap;
   $scope.canceller = $q.defer();
 
-  // $scope.overlays = {
-  //   'Dataset Counts': {
-  //     property: 'dataset_id',
-  //     reducer: 'count',
-  //   },
-  //   'Species Counts': {
-  //     property: 'richness',
-  //     reducer: 'max'
-  //   },
-  //   'Record Counts': {
-  //     property: 'no_records',
-  //     reducer: 'sum',
-  //   },
-  // };
+  $scope.overlays = {
+    'Dataset Counts': {
+      property: 'dataset_id',
+      reducer: 'count',
+    },
+    'Species Counts': {
+      property: 'richness',
+      reducer: 'max'
+    },
+    'Record Counts': {
+      property: 'no_records',
+      reducer: 'sum',
+    },
+  };
 
   $scope.$watch('model.choices', function() {
     $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
@@ -38,21 +38,12 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     var name, payload1 = {};
     if ($state.params.dataset) {
       name = 'Species Counts';
-      if (!$scope.overlay || $scope.overlay == 'Dataset Counts') {
-        $scope.showOverlay(name);
-      }
-      payload1 = {
-        dataset_id: $state.params.dataset,
-        property: 'richness',
-        reducer: 'max'
-      };
+      if (!$scope.overlay || $scope.overlay == 'Dataset Counts') { $scope.showOverlay(name); }
+      payload1 = Object.assign({}, $scope.overlays[name], { dataset_id: $state.params.dataset });
     } else {
       name = 'Dataset Counts';
-      if (!$scope.overlay || $scope.overlay == 'Species Counts') {
-        $scope.showOverlay(name);
-      }
-      payload1.property = 'dataset_id';
-      payload1.reducer = 'count';
+      if (!$scope.overlay || $scope.overlay == 'Species Counts') { $scope.showOverlay(name); }
+      payload1 = Object.assign({}, $scope.overlays[name]);
       Object.keys($scope.model.choices).forEach(function (facet) {
         var choices = $scope.model.choices[facet];
         payload1[facet] = Object.keys(choices).filter(function(choice) {
@@ -63,9 +54,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     $scope.getLayer(payload1, name, $scope.overlay == name);
 
     name = 'Record Counts';
-    var payload2 = Object.assign({}, payload1);
-    payload2.property = 'no_records';
-    payload2.reducer = 'sum';
+    var payload2 = Object.assign({}, payload1, $scope.overlays[name]);
     $scope.getLayer(payload2, name,  $scope.overlay == name);
   };
 
