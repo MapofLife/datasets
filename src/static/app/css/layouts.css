@@ -53,3 +53,7 @@
   .dropdown-menu {
     white-space: nowrap;
   }
+
+  .layouts-sidebar mol-loading-indicator {
+    top:10px; 
+  }

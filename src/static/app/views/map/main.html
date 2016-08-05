@@ -1,11 +1,12 @@
 <div class="container-fluid datasets-map-container">
-  <leaflet id="datasets-map"
+  <leaflet 
     width="100%"
     layers="map.layers"
     bounds="map.bounds"
     defaults="map.defaults"
     legend="map.legend"
-    controls="map.controls">
+    controls="map.controls"
+    event-broadcast="map.events">
   </leaflet>
   <span class="btn-group pull-right">
     <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Dataset Counts'" ng-change="showOverlay()" ng-show="!$state.params.dataset">
@@ -18,4 +19,5 @@
       Record Counts
     </label>
   </span>
+  {{interactivity}}
 </div>

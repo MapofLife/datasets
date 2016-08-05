@@ -3,6 +3,11 @@
         width:800px;
 }
 
+.angular-leaflet-map a {
+       color:inherit; /* removes mol-basic override */
+}
+
+
 .legend:before {
   font-weight: bold;
   text-decoration: underline;
@@ -36,4 +41,14 @@
   float: right;
   padding-left: 12px;
   font: 12px/14px Arial, Helvetica, sans-serif;
+}
+
+.map-popup {
+  text-align: center;
+  opacity: 0.8;
+}
+.map-popup .content {
+  padding: 3pt;
+  font-size: 10pt;
+  text-align: center;
 }
