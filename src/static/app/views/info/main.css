@@ -2,6 +2,6 @@ div.info-container:last-child {
   margin-bottom: 70px;
 }
 
-div.info-container > .info-map > .datasets-map-container {
+div.info-container .datasets-map-container {
   margin-top: 35px;
 }
