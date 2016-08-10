@@ -1,0 +1,15 @@
+<div class="container">
+  <h3><strong>{{ dsinfo.dataset_title }}</strong></h3>
+
+<div style="padding-left:20px">
+  <p>
+    <strong>Author:</strong>
+    {{ dsinfo.authordisplay }}</p>
+  <p>
+    <strong>Taxonomic groups:</strong>
+    {{ dsinfo.taxogroup }}</p>
+  <p ng-show="dsinfo.url">
+    <strong>Source</strong>: <a href="{{ dsinfo.url }}">{{ dsinfo.url }}</a>
+  </p>
+</div>
+</div>
