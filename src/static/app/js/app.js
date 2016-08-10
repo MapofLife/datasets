@@ -121,6 +121,10 @@ angular.module('mol.datasets', [
     .state(
       'datasets.info.map', {
         views: {
+          'title@datasets.info': {
+            templateUrl: 'static/app/views/info/title.html',
+            controller: 'molDatasetsInfoCtrl'
+          },
           'map@datasets.info': {
             templateUrl: 'static/app/views/map/main.html',
             controller: 'molDatasetsMapCtrl'
@@ -132,6 +136,10 @@ angular.module('mol.datasets', [
     .state(
       'datasets.info.info', {
         views: {
+          'title@datasets.info': {
+            templateUrl: 'static/app/views/info/title.html',
+            controller: 'molDatasetsInfoCtrl'
+          },
           'info-pane@datasets.info': {
             templateUrl: 'static/app/views/info/info.html',
             controller: 'molDatasetsInfoCtrl'
@@ -143,6 +151,10 @@ angular.module('mol.datasets', [
     .state(
       'datasets.info.both', {
         views: {
+          'title@datasets.info': {
+            templateUrl: 'static/app/views/info/title.html',
+            controller: 'molDatasetsInfoCtrl'
+          },
           'map@datasets.info': {
             templateUrl: 'static/app/views/map/main.html',
             controller: 'molDatasetsMapCtrl'
