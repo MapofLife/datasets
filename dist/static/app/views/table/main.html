@@ -2,7 +2,11 @@
   <table class="table table-hover table-responsive">
     <thead>
       <tr>
-        <th style="white-space:nowrap" ng-repeat="field in model.facets.fields track by $index" ng-click="toggleSort($index)">
+        <th style="white-space:nowrap"
+            ng-repeat="field in model.facets.fields track by $index"
+            ng-if="model.facets.fields[$index].display"
+            ng-class="{'text-right': model.facets.fields[$index].type == 'number'}"
+            ng-click="toggleSort($index)">
           <span ng-bind-html="field.title"></span>
           <i class="fa fa-sort" aria-hidden="true" ng-show="sortColumn != $index"></i>
           <i class="fa" ng-class="{'fa-sort-asc': !reverse, 'fa-sort-desc':reverse}"
@@ -13,7 +17,7 @@
     <tbody>
       <tr ui-sref="datasets.info.both({dataset: getValue(row, 'dataset_id')})" ui-sref-options="{reload:true}" class="clickable"
         ng-repeat="row in model.facets.rows | choiceFilter:model.choices:model.facets | orderBy:columnValue:reverse:sortComparator">
-        <td ng-repeat="cell in row track by $index">
+        <td ng-repeat="cell in row track by $index" ng-if="model.facets.fields[$index].display">
           <div ng-if="model.facets.fields[$index].type == 'number'">
             <div class="text-right" ng-repeat="content in cell" ng-bind="content.value | number"></div>
           </div>
