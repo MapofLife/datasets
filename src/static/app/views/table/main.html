@@ -5,6 +5,7 @@
         <th style="white-space:nowrap"
             ng-repeat="field in model.facets.fields track by $index"
             ng-if="model.facets.fields[$index].display"
+            ng-class="{'text-right': model.facets.fields[$index].type == 'number'}"
             ng-click="toggleSort($index)">
           <span ng-bind-html="field.title"></span>
           <i class="fa fa-sort" aria-hidden="true" ng-show="sortColumn != $index"></i>
