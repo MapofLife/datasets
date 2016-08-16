@@ -39,29 +39,4 @@ angular.module('mol.datasets')
         });
       });
     };
-  })
-  .filter('overlayFilter', function() {
-    return function(rows, fields, state) {
-      if (!fields) { return rows; }
-      var fieldMap = {};
-      var viz = {};
-      var col = -1;
-      fields.forEach(function(field, i) {
-        fieldMap[field.value] = field;
-        if (field.type == 'viz') { col = i; }
-      });
-      rows.forEach(function(row) {
-        row[col].forEach(function(item) {
-          item.value.forEach(function(val) {
-            val.split(',').forEach(function(name) { viz[name] = 1; })
-          });
-        });
-      });
-      var overlays = Object.keys(viz).map(function(v) { return fieldMap[v].title; });
-      if (!state.params.dataset) {
-        overlays.unshift('No. of datasets');
-        overlays = overlays.filter(function(opt) { return opt != 'No. of species'; });
-      }
-      return overlays;
-    };
   });

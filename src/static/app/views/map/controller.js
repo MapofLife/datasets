@@ -13,7 +13,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     },
     'No. of species': {
       property: 'richness',
-      reducer: 'max'
+      reducer: 'max',
     },
     'No. of records': {
       property: 'no_records',
@@ -21,19 +21,54 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     },
   };
 
-  $scope.$watch('model.choices', function() {
+  $scope.$watch('model.choices', function() { $scope.updateMaps() }, true);
+  $scope.$watch('model.rows', function() { $scope.updateMaps() });
+
+  $scope.updateMaps = function() {
     $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
     $scope.map.layers.overlays = {};
     $timeout($scope.datasetsQuery);
-  }, true);
+  };
 
   $scope.visibleOverlays = function() {
-    var rows = $filter('choiceFilter')($scope.model.rows, $scope.model.choices, $scope.model.fields);
-    var visibleOverlays = $filter('overlayFilter')(rows, $scope.model.fields, $state);
+    var rows;
+    if ($state.params.dataset) {
+      var col = $scope.model.fields.reduce(function(prev, curr, i) { return curr.value == 'dataset_id' ? i : prev; }, -1);
+      rows = $scope.model.rows.filter(function(row) {
+        return row[col].some(function(item) { return item.value == $state.params.dataset});
+      });
+    } else {
+      rows = $filter('choiceFilter')($scope.model.rows, $scope.model.choices, $scope.model.fields);
+    }
+    var visibleOverlays = $scope.overlayFilter(rows);
     $scope.overlays.visible = visibleOverlays.reduce(function(prev, curr) {
       return curr == $scope.overlays.visible ? curr : prev;
     }, visibleOverlays[0]);
     return visibleOverlays;
+  };
+
+  $scope.overlayFilter = function(rows) {
+    if (!$scope.model.fields) { return rows; }
+    var fieldMap = {};
+    var viz = {};
+    var col = -1;
+    $scope.model.fields.forEach(function(field, i) {
+      fieldMap[field.value] = field;
+      if (field.type == 'viz') { col = i; }
+    });
+    rows.forEach(function(row) {
+      row[col].forEach(function(item) {
+        item.value.forEach(function(val) {
+          val.split(',').forEach(function(name) { viz[name] = 1; })
+        });
+      });
+    });
+    var overlays = Object.keys(viz).map(function(v) { return fieldMap[v].title; });
+    if (!$state.params.dataset) {
+      overlays.unshift('No. of datasets');
+      overlays = overlays.filter(function(opt) { return opt != 'No. of species'; });
+    }
+    return overlays;
   };
 
   $scope.showOverlay = function(name) {
@@ -45,27 +80,21 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     $scope.canceller.resolve();
     $scope.canceller = $q.defer();
 
-    var name, payload1 = {};
-    if ($state.params.dataset) {
-      name = 'No. of species';
-      if (!$scope.overlays.visible || $scope.overlays.visible == 'No. of datasets') { $scope.showOverlay(name); }
-      payload1 = Object.assign({}, $scope.overlays[name], { dataset_id: $state.params.dataset });
-    } else {
-      name = 'No. of datasets';
-      if (!$scope.overlays.visible || $scope.overlays.visible == 'No. of species') { $scope.showOverlay(name); }
-      payload1 = Object.assign({}, $scope.overlays[name]);
-      Object.keys($scope.model.choices).forEach(function (facet) {
-        var choices = $scope.model.choices[facet];
-        payload1[facet] = Object.keys(choices).filter(function(choice) {
-          return choices[choice]
-        }).join(',').toLowerCase() || '';
-      });
-    }
-    $scope.getLayer(payload1, name, $scope.overlays.visible == name);
-
-    name = 'No. of records';
-    var payload2 = Object.assign({}, payload1, $scope.overlays[name]);
-    $scope.getLayer(payload2, name,  $scope.overlays.visible == name);
+    $scope.visibleOverlays().forEach(function(name) {
+      var payload = {};
+      if ($state.params.dataset) {
+        payload = Object.assign({}, $scope.overlays[name], { dataset_id: $state.params.dataset });
+      } else {
+        payload = Object.assign({}, $scope.overlays[name]);
+        Object.keys($scope.model.choices).forEach(function (facet) {
+          var choices = $scope.model.choices[facet];
+          payload[facet] = Object.keys(choices).filter(function(choice) {
+            return choices[choice]
+          }).join(',').toLowerCase() || '';
+        });
+      }
+      $scope.getLayer(payload, name, $scope.overlays.visible == name);
+    });
   };
 
   $scope.getLayer = function(payload, name, active) {
