@@ -1,20 +1,21 @@
 angular.module('mol.controllers').controller('molDatasetsMapCtrl',
-    ['$scope', '$timeout', '$q', '$state', 'molApi', 'datasetsMap',
-    function($scope, $timeout, $q, $state, molApi, datasetsMap) {
+    ['$scope', '$timeout', '$q', '$state', 'molApi', 'datasetsMap', '$filter',
+    function($scope, $timeout, $q, $state, molApi, datasetsMap, $filter) {
 
   $scope.map = datasetsMap;
   $scope.canceller = $q.defer();
 
   $scope.overlays = {
-    'Dataset Counts': {
+    visible: '',
+    'No. of datasets': {
       property: 'dataset_id',
       reducer: 'count',
     },
-    'Species Counts': {
+    'No. of species': {
       property: 'richness',
       reducer: 'max'
     },
-    'Record Counts': {
+    'No. of records': {
       property: 'no_records',
       reducer: 'sum',
     },
@@ -26,9 +27,18 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     $timeout($scope.datasetsQuery);
   }, true);
 
-  $scope.showOverlay = function(overlay) {
-    $scope.overlay = overlay || $scope.overlay;
-    $scope.map.showOverlay($scope.overlay);
+  $scope.visibleOverlays = function() {
+    var rows = $filter('choiceFilter')($scope.model.rows, $scope.model.choices, $scope.model.fields);
+    var visibleOverlays = $filter('overlayFilter')(rows, $scope.model.fields, $state);
+    $scope.overlays.visible = visibleOverlays.reduce(function(prev, curr) {
+      return curr == $scope.overlays.visible ? curr : prev;
+    }, visibleOverlays[0]);
+    return visibleOverlays;
+  };
+
+  $scope.showOverlay = function(name) {
+    $scope.overlays.visible = name;
+    $scope.map.showOverlay(name);
   };
 
   $scope.datasetsQuery = function() {
@@ -37,12 +47,12 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
     var name, payload1 = {};
     if ($state.params.dataset) {
-      name = 'Species Counts';
-      if (!$scope.overlay || $scope.overlay == 'Dataset Counts') { $scope.showOverlay(name); }
+      name = 'No. of species';
+      if (!$scope.overlays.visible || $scope.overlays.visible == 'No. of datasets') { $scope.showOverlay(name); }
       payload1 = Object.assign({}, $scope.overlays[name], { dataset_id: $state.params.dataset });
     } else {
-      name = 'Dataset Counts';
-      if (!$scope.overlay || $scope.overlay == 'Species Counts') { $scope.showOverlay(name); }
+      name = 'No. of datasets';
+      if (!$scope.overlays.visible || $scope.overlays.visible == 'No. of species') { $scope.showOverlay(name); }
       payload1 = Object.assign({}, $scope.overlays[name]);
       Object.keys($scope.model.choices).forEach(function (facet) {
         var choices = $scope.model.choices[facet];
@@ -51,11 +61,11 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
         }).join(',').toLowerCase() || '';
       });
     }
-    $scope.getLayer(payload1, name, $scope.overlay == name);
+    $scope.getLayer(payload1, name, $scope.overlays.visible == name);
 
-    name = 'Record Counts';
+    name = 'No. of records';
     var payload2 = Object.assign({}, payload1, $scope.overlays[name]);
-    $scope.getLayer(payload2, name,  $scope.overlay == name);
+    $scope.getLayer(payload2, name,  $scope.overlays.visible == name);
   };
 
   $scope.getLayer = function(payload, name, active) {

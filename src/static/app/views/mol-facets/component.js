@@ -4,12 +4,13 @@ angular.module('mol.facets', [])
       restrict: 'E',
       templateUrl: 'static/app/views/mol-facets/mol-facets.html',
       scope: {
-        facets: '=',
+        fields: '=',
+        rows: '=',
         choices: '=',
-        filterByIds: '='
       },
       link: function(scope) {
-        scope.$watch('facets', scope.updateValuesToLabels);
+        scope.$watch('fields', scope.updateValuesToLabels);
+        scope.$watch('rows', scope.updateValuesToLabels);
         scope.$watch('choices', scope.updateBadges, true);
       },
       controller: ['$scope', function($scope) {
@@ -21,11 +22,11 @@ angular.module('mol.facets', [])
           }
         };
         $scope.updateValuesToLabels = function() {
-          if (!$scope.facets) { return; }
+          if (!$scope.fields || !$scope.rows) { return; }
           $scope.values2labels = {};
-          $scope.facets.fields.forEach(function(field, f) {
+          $scope.fields.forEach(function(field, f) {
             $scope.values2labels[field.value] = {};
-            $scope.facets.rows.forEach(function(row) {
+            $scope.rows.forEach(function(row) {
               row[f].forEach(function(item) {
                 $scope.values2labels[field.value][item.value] = item.title;
               });

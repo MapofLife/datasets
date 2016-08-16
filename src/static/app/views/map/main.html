@@ -1,5 +1,5 @@
 <div class="container-fluid datasets-map-container">
-  <leaflet 
+  <leaflet
     width="100%"
     layers="map.layers"
     bounds="map.bounds"
@@ -9,14 +9,12 @@
     event-broadcast="map.events">
   </leaflet>
   <span class="btn-group pull-right">
-    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Dataset Counts'" ng-change="showOverlay()" ng-show="!$state.params.dataset">
-      Dataset Counts
-    </label>
-    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Species Counts'" ng-change="showOverlay()" ng-show="$state.params.dataset">
-      Species Counts
-    </label>
-    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Record Counts'" ng-change="showOverlay()">
-      Record Counts
+    <label ng-repeat="overlay in visibleOverlays()"
+        ng-bind="overlay"
+        uib-btn-radio="'{{overlay}}'"
+        ng-change="showOverlay('{{overlay}}')"
+        ng-model="overlays.visible"
+        class="btn btn-primary btn-xs">
     </label>
   </span>
   {{interactivity}}

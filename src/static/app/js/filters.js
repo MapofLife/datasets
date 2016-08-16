@@ -10,19 +10,19 @@ angular.module('mol.datasets')
     };
   })
   .filter('excludeSelected', function() {
-    return function(values, facet, choices) {
+    return function(values, field, choices) {
       return values.filter(function(value) {
-        if (!choices[facet.value]) { return true; }
-        return !choices[facet.value][value];
+        if (!choices[field.value]) { return true; }
+        return !choices[field.value][value];
       });
     };
   })
   .filter('choiceFilter', function() {
-    return function(rows, choices, facets, skip_column) {
-      if (!facets) { return rows; }
+    return function(rows, choices, fields, skip_column) {
+      if (!fields) { return rows; }
 
       // Convert choices object into an array of arrays to make filtering easier
-      var choice = facets.fields.map(function(field) {
+      var choice = fields.map(function(field) {
         var object = choices[field.value] || {};
         return field.value == skip_column ? []
           : Object.keys(object).filter(function(key) { return object[key]; });
@@ -38,5 +38,30 @@ angular.module('mol.datasets')
           });
         });
       });
+    };
+  })
+  .filter('overlayFilter', function() {
+    return function(rows, fields, state) {
+      if (!fields) { return rows; }
+      var fieldMap = {};
+      var viz = {};
+      var col = -1;
+      fields.forEach(function(field, i) {
+        fieldMap[field.value] = field;
+        if (field.type == 'viz') { col = i; }
+      });
+      rows.forEach(function(row) {
+        row[col].forEach(function(item) {
+          item.value.forEach(function(val) {
+            val.split(',').forEach(function(name) { viz[name] = 1; })
+          });
+        });
+      });
+      var overlays = Object.keys(viz).map(function(v) { return fieldMap[v].title; });
+      if (!state.params.dataset) {
+        overlays.unshift('No. of datasets');
+        overlays = overlays.filter(function(opt) { return opt != 'No. of species'; });
+      }
+      return overlays;
     };
   });

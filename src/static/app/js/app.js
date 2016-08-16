@@ -12,8 +12,8 @@ angular.module('mol.datasets', [
   'ngCookies',
   'ngAnimate',
   'ui.bootstrap',
-  'mol.facets',
   'mol.api',
+  'mol.facets',
   'mol.services',
   'mol.loading-indicator',
   'mol.controllers'

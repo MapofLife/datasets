@@ -5,18 +5,19 @@ angular.module('mol.controllers')
   $rootScope.$state = $state;
   $scope.model = {
       choices: {},
-      facets: { fields:[], rows:[] },
-      filterByIds: []
+      fields: [],
+      rows: [],
   };
 
   $scope.initialize = function() {
     molApi({service: 'inventory/datasets', loading: true}).then(function(response) {
-      $scope.model.facets = response.data;
+      $scope.model.fields = response.data.fields;
+      $scope.model.rows = response.data.rows;
     });
   };
 
   $scope.getValue = function(row, columnName) {
-    var index = $scope.model.facets.fields.reduce(function(prev, curr, i) {
+    var index = $scope.model.fields.reduce(function(prev, curr, i) {
       return curr.value == columnName ? i : prev;
     }, -1);
     return row[index].map(function(item) { return item.value; }).join(' ');
@@ -37,7 +38,7 @@ angular.module('mol.controllers')
   $scope.sortComparator = function(a, b) {
     var aa = a.value,
         bb = b.value,
-        type = $scope.model.facets.fields[$scope.sortColumn].type;
+        type = $scope.model.fields[$scope.sortColumn].type;
     if (type == 'number') {
       return +aa > +bb ? 1: (+aa < +bb ? -1 : 0);
     }

@@ -57,6 +57,7 @@ molServices.factory(
 
         addLegend: function(legendData) {
           var legend = { position: 'bottomleft', labels: [], colors: [] };
+          var used = {};
           legendData.colors.reduce(function(prev, curr, i) {
             var item = {
               low: i ? legendData.bins[i-1] + 1 : 1,
@@ -64,7 +65,10 @@ molServices.factory(
               color: curr
             };
             if (item.low > item.high) { item.low = item.high; }
-            prev.push(item);
+            // if (!used[item.low]) {
+              used[item.low] = true;
+              prev.push(item);
+            // }
             return prev;
           }, []).forEach(function(item) {
             var low = $filter('number')(item.low, 0);
