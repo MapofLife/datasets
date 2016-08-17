@@ -64,13 +64,24 @@
   background-color: #286090;
 }
 
-.visible-parts h5 {
+.mol-facets h5.heading {
+  font-weight: bold;
+}
+
+.mol-facets > .visible-parts h5 {
   display: inline;
 }
 
 .mol-facets label {
   font-weight: normal;
   display: inline;
+}
+
+
+.mol-facets label.group-header {
+  font-weight: 500;
+  display: inline;
+  margin-left: -6px;
 }
 
 .mol-facets hr {

@@ -9,11 +9,11 @@ angular.module('mol.datasets')
       return $sce.trustAsHtml(str);
     };
   })
-  .filter('excludeSelected', function() {
-    return function(values, field, choices) {
-      return values.filter(function(value) {
+  .filter('filterSelected', function() {
+    return function(rows, field, choices) {
+      return rows.filter(function(row) {
         if (!choices[field.value]) { return true; }
-        return !choices[field.value][value];
+        return !choices[field.value][row.value];
       });
     };
   })
