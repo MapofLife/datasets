@@ -63,8 +63,8 @@
       <div ng-show="expanded[group] || !group">
         <div ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
             | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')"
-            class="clickable" ng-click="choices[field.value][value] = !choices[field.value][value]">
-          <label class="clickable ng-binding" ng-show="!choices[field.value][value]"
+            class="clickable" ng-click="choices[field.value][value] = !choices[field.value][value]" ng-show="!choices[field.value][value]">
+          <label class="clickable ng-binding"
             <input type="checkbox" ng-model="choices[field.value][value]"
                 class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
             {{subgroup[0].title}}&nbsp;
@@ -74,7 +74,7 @@
       </div>
     </div>
     <label class="col-xs-offset-1" uib-collapse="c"
-      ng-show="!(rows | choiceFilter:choices:fields:field.value | map: getColumn(fIndex) | flatten:shallow | filterSelected:field:choices).length">
+        ng-show="!(rows | choiceFilter:choices:fields:field.value | map: getColumn(fIndex) | flatten:shallow | filterSelected:field:choices).length">
       No remaining options
     </label>
   </div>
