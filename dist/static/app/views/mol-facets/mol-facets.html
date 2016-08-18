@@ -21,7 +21,7 @@
         <span class="clear-all">
           <a href="#" ng-click="clear()" ng-show="badges.length" class="badge" >
             Clear all
-            <i class="clickable fa fa-times"></i>
+            <i class="clickable fa fa-times remove-all-badges"></i>
           </a>
         </span>
         <span class="dataset-count">Datasets: {{(rows | choiceFilter:choices:fields).length | number: 0}}</span>
@@ -30,7 +30,7 @@
     <span ng-repeat="badge in badges">
       <a class="badge" href="#" ng-show="choices[badge.facet][badge.value]" ng-click="choices[badge.facet][badge.value] = false">
         {{badge.title}}
-        <i class="pull-right fa fa-times unselect"></i>
+        <i class="fa fa-times unselect"></i>
       </a>
     </span>
     <span class="nothing-selected" ng-show="!badges.length">Select items to filter below</span>
@@ -49,13 +49,20 @@
                 | map: getColumn(fIndex) | flatten:shallow | filterSelected:field:choices | orderBy:'sortby'
                 | defaults:{groupby:''} | groupBy:'groupby')">
       <label class="clickable ng-binding group-header" ng-show="group">
-        <input type="checkbox" ng-click="selectGroup(groupMembers, field.value)"
+        <input type="checkbox" ng-click="expanded[group] = !expanded[group]"
               class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
         {{group}}&nbsp;
         <span ng-bind-html="'(' + groupMembers.length + ')'" class="ng-binding"></span>
+        <span class="add-all">
+          <a href="#" ng-click="selectGroup(groupMembers, field.value)" class="badge" >
+            Add all
+            <i class="clickable fa fa-plus add-all-badges"></i>
+          </a>
+        </span>
       </label>
-      <div ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
-                | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')">
+      <div ng-show="expanded[group]"
+        ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
+          | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')">
         <label class="clickable ng-binding" ng-show="!choices[field.value][value]">
           <input type="checkbox" ng-model="choices[field.value][value]"
                 class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
