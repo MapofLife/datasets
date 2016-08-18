@@ -61,12 +61,12 @@
         </span>
       </label>
       <div ng-show="expanded[group] || !group">
-        <div class="group-members"
-          ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
-            | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')">
+        <div ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
+            | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')"
+            class="clickable" ng-click="choices[field.value][value] = !choices[field.value][value]">
           <label class="clickable ng-binding" ng-show="!choices[field.value][value]"
             <input type="checkbox" ng-model="choices[field.value][value]"
-                  class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
+                class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
             {{subgroup[0].title}}&nbsp;
             <span ng-bind-html="'(' + subgroup.length + ')'" class="ng-binding"></span>
           </label>
