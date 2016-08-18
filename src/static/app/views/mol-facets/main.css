@@ -28,8 +28,6 @@
 }
 
 .mol-facets .fa-times.unselect-all {
-  margin-right: 8px;
-  padding: 0 4px;
   border-radius: 4px;
 }
 
@@ -74,6 +72,7 @@
 
 .mol-facets h5.heading {
   font-weight: bold;
+  display: inline;
 }
 
 .mol-facets > .visible-parts h5 {
@@ -97,5 +96,9 @@
 }
 
 .mol-facets .group-container {
+  margin-bottom: 4px;
+}
+
+mol-facets .heading-container {
   margin-bottom: 4px;
 }
