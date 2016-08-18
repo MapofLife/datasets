@@ -21,7 +21,9 @@
   border-radius: 10px;
 }
 
-.mol-facets a.badge i.unselect {
+.mol-facets a.badge i.unselect,
+.mol-facets a.badge i.remove-all-badges,
+.mol-facets a.badge i.add-all-badges {
   color: gray;
 }
 
@@ -37,6 +39,12 @@
 
 .mol-facets .clear-all {
   margin-left: 8px;
+  color: gray;
+}
+
+.mol-facets .add-all {
+  margin-left: 8px;
+  color: gray;
 }
 
 .mol-facets .nothing-selected {

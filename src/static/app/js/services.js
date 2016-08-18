@@ -65,10 +65,10 @@ molServices.factory(
               color: curr
             };
             if (item.low > item.high) { item.low = item.high; }
-            // if (!used[item.low]) {
+            if (!used[item.low]) {
               used[item.low] = true;
               prev.push(item);
-            // }
+            }
             return prev;
           }, []).forEach(function(item) {
             var low = $filter('number')(item.low, 0);
@@ -115,7 +115,6 @@ molServices.factory(
 	            },
 					};
 				},
-
 
         addOverlay: function(name, active, response) {
           map.legends[name] = map.addLegend(response.data.legend);
