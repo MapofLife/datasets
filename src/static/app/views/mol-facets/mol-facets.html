@@ -60,7 +60,7 @@
           </a>
         </span>
       </label>
-      <div ng-show="expanded[group] || !group">
+      <div uib-collapse="!expanded[group] && group">
         <div ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
             | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')"
             class="clickable" ng-click="choices[field.value][value] = !choices[field.value][value]" ng-show="!choices[field.value][value]">
