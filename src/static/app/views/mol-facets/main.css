@@ -95,3 +95,7 @@
 .mol-facets hr {
   margin: 4px;
 }
+
+.mol-facets .group-container {
+  margin-bottom: 4px;
+}
