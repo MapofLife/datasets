@@ -45,22 +45,22 @@
       <h5 class="left heading">{{field.title}}</h5>
     </div>
     <div class="col-xs-offset-1" uib-collapse="c"
-        ng-repeat="(category, inCategory) in categories = (rows | choiceFilter:choices:fields:field.value
+        ng-repeat="(group, groupMembers) in categories = (rows | choiceFilter:choices:fields:field.value
                 | map: getColumn(fIndex) | flatten:shallow | filterSelected:field:choices | orderBy:'sortby'
                 | defaults:{groupby:''} | groupBy:'groupby')">
-      <label class="clickable ng-binding group-header" ng-show="category">
-        <input type="checkbox" ng-model="choices[field.value]"
+      <label class="clickable ng-binding group-header" ng-show="group">
+        <input type="checkbox" ng-click="selectGroup(groupMembers, field.value)"
               class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
-        {{category}}&nbsp;
-        <span ng-bind-html="'(' + inCategory.length + ')'" class="ng-binding"></span>
+        {{group}}&nbsp;
+        <span ng-bind-html="'(' + groupMembers.length + ')'" class="ng-binding"></span>
       </label>
-      <div ng-repeat="(value, group) in options = (rows | choiceFilter:choices:fields:field.value
-                | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:category | groupBy:'value')">
+      <div ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
+                | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')">
         <label class="clickable ng-binding" ng-show="!choices[field.value][value]">
           <input type="checkbox" ng-model="choices[field.value][value]"
                 class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched hidden" />
-          {{group[0].title}}&nbsp;
-          <span ng-bind-html="'(' + group.length + ')'" class="ng-binding"></span>
+          {{subgroup[0].title}}&nbsp;
+          <span ng-bind-html="'(' + subgroup.length + ')'" class="ng-binding"></span>
         </label>
       </div>
     </div>

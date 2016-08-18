@@ -62,6 +62,12 @@ angular.module('mol.facets', [])
             });
           });
         };
+        $scope.selectGroup = function(groupMembers, fieldValue) {
+          if (!$scope.choices[fieldValue]) { $scope.choices[fieldValue] = {}; }
+          groupMembers.forEach(function(member) {
+            $scope.choices[fieldValue][member.value] = true;
+          });
+        };
       }]
     };
   }]);
