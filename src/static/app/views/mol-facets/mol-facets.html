@@ -66,7 +66,7 @@
       </label>
       <div uib-collapse="!expanded[group] && group">
         <div ng-repeat="(value, subgroup) in options = (rows | choiceFilter:choices:fields:field.value
-            | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | filterBy:['groupby']:group | groupBy:'value')"
+            | map: getColumn(fIndex) | flatten:shallow | orderBy:'sortby' | where:{groupby:group} | groupBy:'value')"
             class="clickable" ng-click="choices[field.value][value] = !choices[field.value][value]" ng-show="!choices[field.value][value]">
           <label class="clickable ng-binding"
             <input type="checkbox" ng-model="choices[field.value][value]"
