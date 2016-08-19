@@ -14,21 +14,12 @@ molServices.factory(
         controls: { fullscreen: { position: 'topright' }},
         timestamp: Date.now(),
         // events: { map: { enable: ['zoomstart', 'drag', 'click', 'mousemove'], logic: 'emit' } },
-        defaults: { minZoom: 2, scrollWheelZoom: false},
+        defaults: { minZoom: 2, scrollWheelZoom: false },
         bounds: {},
         legend: {},
         legends: {},
-				events: {
-					map: {
-						enable: ['mouseout','mousemove'],
-						logic: 'emit'
-					}
-				},
-				popup: L.popup({
-					closeButton:false,
-					autoPan:false,
-					className: 'map-popup'
-				}),
+				events: { map: { enable: ['mouseout','mousemove'], logic: 'emit' } },
+				popup: L.popup({ closeButton:false, autoPan:false, className: 'map-popup' }),
         layers: {
           overlays: {},
           baselayers: {
@@ -38,7 +29,7 @@ molServices.factory(
               type: 'xyz',
               layerParams: { showOnSelector: false },
               layerOptions: { showOnSelector: false },
-            }
+            },
           },
         },
 
