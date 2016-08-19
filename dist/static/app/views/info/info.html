@@ -1,9 +1,20 @@
 <div class="container">
   <div class="dataset-section" ng-repeat="md in dsinfo.metadata">
-    <hr class="featurette-divider">
+    <hr class="featurette-divider" />
     <h3>{{ md.section }}</h3>
     <div style="padding-left:20px" ng-repeat="mdc in md.children">
       <strong>{{ mdc.label }}</strong>: {{ mdc.value }}
     </div>
+  </div>
+  <div class="dataset-section" ng-if="dsinfo.children && dsinfo.children.length && dsinfo.children[0].dataset_title">
+    <hr class="featurette-divider" />
+    <h3>Constituent Datasets</h3>
+    <ul class="info-children">
+      <li ng-repeat="dataset in dsinfo.children">
+        <a ng-href="{{dataset.dataset_id}}">
+          {{dataset.dataset_title}}
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
