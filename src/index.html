@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <title>Map of Life - Datasets</title>
     <link rel="icon" href="https://mol.org/static/img/favicon.ico" type="image/x-icon"></link>
-    <link class="dev" rel="stylesheet" href="static/components/leaflet/dist/leaflet.css"></link>
     <link class="dev" rel="stylesheet" href="static/components/angular-loading-bar/src/loading-bar.css"/></link>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/></link>
-    <link class="dev" href='static/components/Leaflet.fullscreen/dist//leaflet.fullscreen.css' rel='stylesheet' /></link>
+    <!--link class="dev" rel="stylesheet" href="static/components/leaflet/dist/leaflet.css"></link>
+    <link class="dev" href='static/components/Leaflet.fullscreen/dist//leaflet.fullscreen.css' rel='stylesheet' /></link-->
 
     <link rel="stylesheet" href="//mol.org/static/css/mol-basic.css"/></link>
     <link rel="stylesheet" href="//mol.org/static/css/mol-header.css"/></link>
@@ -48,17 +48,18 @@
     <script class="dev" src="static/components/lodash/lodash.js"></script>
     <script class="dev" src="static/components/angular-simple-logger/dist/angular-simple-logger.js"></script>
     <script class="dev" src="static/components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
-    <script class="dev" src="static/components/leaflet/dist/leaflet.js"></script>
+    <!--script class="dev" src="static/components/leaflet/dist/leaflet.js"></script>
     <script class="dev" src="static/components/Leaflet.fullscreen/dist/Leaflet.fullscreen.min.js"></script>
     <script class="dev" src="static/components/Leaflet.utfgrid/dist/leaflet.utfgrid.js"></script>
     <script class="dev" src="static/components/angular-simple-logger/dist/angular-simple-logger.js"></script>
-    <script class="dev" src="static/components/ui-leaflet/dist/ui-leaflet.js"></script>
-
-
+    <script class="dev" src="static/components/ui-leaflet/dist/ui-leaflet.js"></script-->
+    <script class="dev" src="static/components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+    <script class="dev" src="static/components/angular-translate/angular-translate.js"></script>
 
     <!--MOL components -->
     <script class="dev" src="static/components/mol-ui-components/loading-indicator/component.min.js"></script>
     <script class="dev" src="static/components/mol-ui-components/api/component.min.js"></script>
+    <script class="dev" src="static/components/mol-ui-components/ui-map/component.js"></script>
 
     <!-- App components -->
     <script class="dev" src="static/app/js/app.js"></script>
@@ -68,8 +69,9 @@
     <script class="dev" src="static/app/views/info/controller.js"></script>
     <script class="dev" src="static/app/js/services.js"></script>
     <script class="dev" src="static/app/js/component.js"></script>
-
     <script class="dev" src="static/app/js/filters.js"></script>
+    <script class="dev" src="static/app/js/mapstyles.js"></script>
+    <script class="dev" src="static/app/js/helpers.js"></script>
 
   </head>
   <body ui-view state="{{ $state.current.name }}"></body>

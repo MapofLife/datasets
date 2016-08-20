@@ -43,9 +43,11 @@
     "angular-simple-logger": "~0.1.4"
   },
   "dependencies": {
+    "angular-translate": "~2.11.0",
     "angular-animate": "^1.5.7",
     "Leaflet.fullscreen": "Leaflet/Leaflet.fullscreen#^1.0.1",
     "angular-cookies": "^1.5.8",
-    "Leaflet.utfgrid": "*"
+    "Leaflet.utfgrid": "*",
+    "angular-google-maps": "^2.3.4"
   }
 }

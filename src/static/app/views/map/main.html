@@ -1,5 +1,29 @@
 <div class="container-fluid datasets-map-container">
-  <leaflet
+  <ui-gmap-google-map
+      class="detailed-map"
+      center="map.center"
+      zoom="map.zoom"
+      control="map.control"
+      bounds="map.bounds"
+      events="map.events"
+      options="map.options"
+      pan="true">
+      <ui-gmap-map-type
+        ng-repeat="mt in map.overlayMapTypes"
+        options="mt"
+        show="mt.show"
+        refresh="mt.refresh">
+      </ui-gmap-map-type>
+      <ui-gmap-window
+          show="map.infowindow.show"
+          coords="map.infowindow.coords"
+          options="map.infowindow.options"
+          templateUrl="'static/app/views/detailed-map/infowindow.html'"
+          templateParameter="map.infowindow.model"
+          >
+      </ui-gmap-window>
+  </ui-gmap-google-map>
+  <!--leaflet
     width="100%"
     layers="map.layers"
     bounds="map.bounds"
@@ -7,7 +31,7 @@
     legend="map.legend"
     controls="map.controls"
     event-broadcast="map.events">
-  </leaflet>
+  </leaflet-->
   <span class="btn-group pull-right">
     <label ng-repeat="overlay in visibleOverlays()"
         ng-bind="overlay"

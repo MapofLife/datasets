@@ -4,7 +4,9 @@ angular.module('mol.controllers',[]);
 
 angular.module('mol.datasets', [
   'ui.router',
-  'ui-leaflet',
+  //'ui-leaflet',
+  'uiGmapgoogle-maps',
+  'pascalprecht.translate',
   'angular-loading-bar',
   'angular.filter',
   'ngResource',
@@ -12,19 +14,49 @@ angular.module('mol.datasets', [
   'ngCookies',
   'ngAnimate',
   'ui.bootstrap',
+  'mol.ui-map',
   'mol.api',
   'mol.facets',
   'mol.services',
   'mol.loading-indicator',
-  'mol.controllers'
+  'mol.controllers',
 ])
+.constant('molConfig',{
+    module : 'datasets', //module name (used in routing)
+    api : '0.x',
+    //base : angular.element('#mol-asset-base').attr('content'), //static assets base
+    //url :  angular.element('#mol-url').attr('content'),
+    lang : angular.element('#mol-lang').attr('content'),
+    //region : angular.element('#mol-region').attr('content'),
+    prod:(window.location.hostname!=='localhost') //boolean for MOL production mode
+})
 .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.includeBar = false;
     cfpLoadingBarProvider.latencyThreshold = 500;
   }])
+.config(['$translateProvider','molConfig', function($translateProvider,molConfig) {
+  if(molConfig.lang) {
+    $translateProvider.preferredLanguage(molConfig.lang)
+  } else {
+    $translateProvider.determinePreferredLanguage()
+  }
+  $translateProvider.registerAvailableLanguageKeys([
+      'en','fr','es','pt','de','zh' ///should move to meta-tag config or api call
+  ]);
+}])
+.config(['uiGmapGoogleMapApiProvider','$translateProvider',
+	function(uiGmapGoogleMapApiProvider,$translateProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyABlkTTWW1KD6TrmFF_X6pjWrFMGgmpp9g',
+        v: '3.24', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization',
+        language: $translateProvider.preferredLanguage()
+
+    });
+}])
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
-            function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
+    function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
   $httpProvider.defaults.useXDomain = true;
   $httpProvider.defaults.withCredentials = false;
   $locationProvider.html5Mode(true);

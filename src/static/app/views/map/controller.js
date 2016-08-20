@@ -1,8 +1,9 @@
 angular.module('mol.controllers').controller('molDatasetsMapCtrl',
-    ['$scope', '$timeout', '$q', '$state', 'molApi', 'datasetsMap', '$filter',
-    function($scope, $timeout, $q, $state, molApi, datasetsMap, $filter) {
+    ['$scope', '$timeout', '$q', '$state', 'molApi', /*'datasetsMap',*/ '$filter', 'molUiMap',
+    function($scope, $timeout, $q, $state, molApi, /*datasetsMap,*/ $filter, molUiMap) {
 
-  $scope.map = datasetsMap;
+  $scope.map = new molUiMap();
+  //$scope.map = datasetsMap;
   $scope.canceller = $q.defer();
 
   $scope.overlays = {
@@ -25,9 +26,9 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   $scope.$watch('model.rows', function() { $scope.updateMaps() });
 
   $scope.updateMaps = function() {
-    $scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
-    $scope.map.layers.overlays = {};
-    $timeout($scope.datasetsQuery);
+    //$scope.map.legend = { position: 'bottomleft', labels: [], colors: [] };
+    //$scope.map.layers.overlays = {};
+    $scope.datasetsQuery();
   };
 
   $scope.visibleOverlays = function() {
@@ -73,10 +74,11 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.showOverlay = function(name) {
     $scope.overlays.visible = name;
-    $scope.map.showOverlay(name);
+    //$scope.map.showOverlay(name);
   };
 
   $scope.datasetsQuery = function() {
+    $scope.stale = false;
     $scope.canceller.resolve();
     $scope.canceller = $q.defer();
 
@@ -104,7 +106,21 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       canceller: $scope.canceller,
       processing: true
     }).then(function(response) {
-      $scope.map.addOverlay(name, active, response);
+      // $scope.map.addOverlay(name, active, response);
+      $scope.tilesloaded=false;
+      $scope.map.setOverlay({
+          tile_url: 'https://{0}/mol/api/v1/map/{1}/{z}/{x}/{y}.png'
+            .format(response.cdn_url.https, response.layergroupid),
+          grid_url: 'https://{0}/mol/api/v1/map/{1}/0/{z}/{x}/{y}.grid.json'
+            .format(response.cdn_url.https, response.layergroupid),
+          key: response.layergroupid,
+          attr: '©2014 Map of Life',
+          name: 'detail',
+          index:0,
+          opacity: 0.8,
+          type: 'detail'
+      },0);
+
     });
   };
 

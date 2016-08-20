@@ -6,7 +6,7 @@ molServices.factory(
 	     return "0.x"
  	  }
   ]
-).factory('datasetsMap', ['$q','$rootScope','$timeout','$filter', 'leafletData', 'leafletBoundsHelpers', 'leafletMapEvents',
+)/*.factory('datasetsMap', ['$q','$rootScope','$timeout','$filter', 'leafletData', 'leafletBoundsHelpers', 'leafletMapEvents',
   function($q, $rootScope, $timeout, $filter, leafletData, leafletBoundsHelpers, leafletMapEvents) {
     var map = {
         center: { lat: 0, lng: 0, zoom: 3 },
@@ -151,4 +151,4 @@ molServices.factory(
 			});
 
     return map;
-}]);
+}]);*/
