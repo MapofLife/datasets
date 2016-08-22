@@ -1,5 +1,5 @@
 <div class="container-fluid datasets-map-container">
-  <leaflet
+  <leaflet ng-if="showMap"
     width="100%"
     layers="map.layers"
     bounds="map.bounds"
@@ -13,7 +13,7 @@
         ng-bind="overlay"
         uib-btn-radio="'{{overlay}}'"
         ng-change="showOverlay('{{overlay}}')"
-        ng-model="overlays.visible"
+        ng-model="map.visible"
         class="btn btn-primary btn-xs">
     </label>
   </span>
