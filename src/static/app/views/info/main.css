@@ -5,7 +5,3 @@ div.info-container:last-child {
 div.info-container .datasets-map-container {
   margin-top: 35px;
 }
-
-.info-children a {
-  color: black;
-}
