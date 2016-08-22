@@ -4,9 +4,9 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.map = datasetsMap;
   $scope.canceller = $q.defer();
+  $scope.showMap = false;
 
   $scope.overlays = {
-    visible: '',
     'No. of datasets': {
       property: 'dataset_id',
       reducer: 'count',
@@ -41,8 +41,8 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
       rows = $filter('choiceFilter')($scope.model.rows, $scope.model.choices, $scope.model.fields);
     }
     var visibleOverlays = $scope.overlayFilter(rows);
-    $scope.overlays.visible = visibleOverlays.reduce(function(prev, curr) {
-      return curr == $scope.overlays.visible ? curr : prev;
+    $scope.map.visible = visibleOverlays.reduce(function(prev, curr) {
+      return curr == $scope.map.visible ? curr : prev;
     }, visibleOverlays[0]);
     return visibleOverlays;
   };
@@ -72,7 +72,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
   };
 
   $scope.showOverlay = function(name) {
-    $scope.overlays.visible = name;
+    $scope.map.visible = name;
     $scope.map.showOverlay(name);
   };
 
@@ -93,8 +93,9 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
           }).join(',').toLowerCase() || '';
         });
       }
-      $scope.getLayer(payload, name, $scope.overlays.visible == name);
+      $scope.getLayer(payload, name, $scope.map.visible == name);
     });
+    $scope.showMap = $state.current.name.indexOf('.both') > -1 || $state.current.name.indexOf('.map') > -1;
   };
 
   $scope.getLayer = function(payload, name, active) {

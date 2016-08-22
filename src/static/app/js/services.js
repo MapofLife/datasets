@@ -32,6 +32,7 @@ molServices.factory(
             },
           },
         },
+        visible: '',
 
         updateMapBounds: function(coordinates) {
           var padding = 5;
