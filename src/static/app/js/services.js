@@ -1,10 +1,10 @@
 var molServices = angular.module('mol.services', []);
 
 molServices.factory(
-	'molApiVersion', [
-		function() {
-	     return "0.x"
- 	  }
+  'molApiVersion', [
+    function() {
+       return "0.x"
+     }
   ]
 ).factory('datasetsMap', ['$q','$rootScope','$timeout','$filter', 'leafletData', 'leafletBoundsHelpers', 'leafletMapEvents',
   function($q, $rootScope, $timeout, $filter, leafletData, leafletBoundsHelpers, leafletMapEvents) {
@@ -18,8 +18,8 @@ molServices.factory(
         bounds: {},
         legend: {},
         legends: {},
-				events: { map: { enable: ['mouseout','mousemove'], logic: 'emit' } },
-				popup: L.popup({ closeButton:false, autoPan:false, className: 'map-popup' }),
+        events: { map: { enable: ['mouseout','mousemove'], logic: 'emit' } },
+        popup: L.popup({ closeButton:false, autoPan:false, className: 'map-popup' }),
         layers: {
           overlays: {},
           baselayers: {
@@ -84,37 +84,37 @@ molServices.factory(
             if (map.layers.overlays[name]) {
               map.layers.overlays[name].visible = name == overlay;
               if(name == overlay &&  map.layers.overlays[name].grid_url) {
-								map.updateGrid(map.layers.overlays[name].grid_url)
-							}
+                map.updateGrid(map.layers.overlays[name].grid_url)
+              }
             }
           });
         },
 
-				updateGrid: function(grid_url) {
-					map.layers.overlays.grid = {
-							name: 'UTFGrid Interactivity',
-							type: 'utfGrid',
-							url: grid_url,
-							visible: true,
-							doRefresh: true,
-							layerParams: {
-	              opacity: 0.8,  // transparent: true,
-	              showOnSelector: false
-	            },
-	            layerOptions: {
-	              opacity: 0.8,  // transparent: true,
-	              showOnSelector: false
-	            },
-					};
-				},
+        updateGrid: function(grid_url) {
+          map.layers.overlays.grid = {
+              name: 'UTFGrid Interactivity',
+              type: 'utfGrid',
+              url: grid_url,
+              visible: true,
+              doRefresh: true,
+              layerParams: {
+                opacity: 0.8,  // transparent: true,
+                showOnSelector: false
+              },
+              layerOptions: {
+                opacity: 0.8,  // transparent: true,
+                showOnSelector: false
+              },
+          };
+        },
 
         addOverlay: function(name, active, response) {
           map.legends[name] = map.addLegend(response.data.legend);
           if (active) {
             map.showLegend(name);
             map.updateMapBounds(response.data.extent.coordinates);
-						//map.layers.overlays.grid = undefined;
-						map.updateGrid(response.data.grid_url + '?callback={cb}');
+            //map.layers.overlays.grid = undefined;
+            map.updateGrid(response.data.grid_url + '?callback={cb}');
           }
           map.layers.overlays[name] = {
             name: name,
@@ -122,7 +122,7 @@ molServices.factory(
             doRefresh: true,
             visible: active,
             url: response.data.tile_url,
-						grid_url: response.data.grid_url + '?callback={cb}',
+            grid_url: response.data.grid_url + '?callback={cb}',
             layerParams: {
               opacity: 0.8,  // transparent: true,
               showOnSelector: false
@@ -136,20 +136,20 @@ molServices.factory(
 
       };
 
-			$rootScope.$on('leafletDirectiveMap.utfgridMouseover', function(event, leafletEvent) {
-									 // the UTFGrid information is on leafletEvent.data
- 								 leafletData.getMap().then(function(lmap) {
-										map.popup.setLatLng(leafletEvent.latlng)
-											.setContent('<div class="content">'
-											 + $filter('number')(leafletEvent.data.ct) + '</div>');
-								 		try{map.popup.openOn(lmap);} catch(e){};
-									});
-			});
-			$rootScope.$on('leafletDirectiveMap.mouseout', function(event){
+      $rootScope.$on('leafletDirectiveMap.utfgridMouseover', function(event, leafletEvent) {
+                   // the UTFGrid information is on leafletEvent.data
+                  leafletData.getMap().then(function(lmap) {
+                    map.popup.setLatLng(leafletEvent.latlng)
+                      .setContent('<div class="content">'
+                       + $filter('number')(leafletEvent.data.ct) + '</div>');
+                     try{map.popup.openOn(lmap);} catch(e){};
+                  });
+      });
+      $rootScope.$on('leafletDirectiveMap.mouseout', function(event){
        leafletData.getMap().then(function(lmap) {
-				 lmap.closePopup();
-    		});
-			});
+         lmap.closePopup();
+        });
+      });
 
     return map;
 }]);
