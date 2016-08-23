@@ -100,6 +100,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.getLayer = function(payload, name, active) {
     molApi({
+      //url: "localhost:8080",
       service: 'inventory/maps',
       params : payload,
       canceller: $scope.canceller,

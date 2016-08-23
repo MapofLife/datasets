@@ -49,29 +49,21 @@ molServices.factory(
 
         addLegend: function(legendData) {
           var legend = { position: 'bottomleft', labels: [], colors: [] };
-          var used = {};
           legendData.colors.reduce(function(prev, curr, i) {
             var item = {
-              low: i ? legendData.bins[i-1] + 1 : 1,
-              high: i > legendData.bins.length - 1 ? 'and over' : legendData.bins[i],
+              low: i ? legendData.bins[i-1]+1 : 1,
+              high: legendData.bins[i],
               color: curr
             };
-            if (item.low > item.high) { item.low = item.high; }
-            // if (!used[item.low]) {
-              used[item.low] = true;
-              prev.push(item);
-            // }
+            prev.push(item);
             return prev;
           }, []).forEach(function(item) {
-            var low = $filter('number')(item.low, 0);
+            var low = $filter('number')(item.low, 0),
+                high =  $filter('number')(item.high, 0);
             if (item.low == item.high) {
-              legend.labels.push(low);
+              legend.labels.push(high);
             } else {
-              if (isNaN(item.high)) {
-                legend.labels.push(low + ' ' + item.high);
-              } else {
-                legend.labels.push(low + ' - ' + $filter('number')(item.high, 0));
-              }
+              legend.labels.push(low + ' - ' + high);
             }
             legend.colors.push(item.color);
           });
