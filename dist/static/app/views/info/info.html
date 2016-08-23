@@ -2,8 +2,11 @@
   <div class="dataset-section" ng-repeat="md in dsinfo.metadata">
     <hr class="featurette-divider" />
     <h3>{{ md.section }}</h3>
-    <div style="padding-left:20px" ng-repeat="mdc in md.children">
-      <strong>{{ mdc.label }}</strong>: {{ mdc.value }}
+    <div class="info-item" ng-repeat="mdc in md.children">
+      <p>
+        <strong>{{ mdc.label }}:</strong>
+        <span ng-bind-html="mdc.value | linky:'_blank'"></span>
+      </p>
     </div>
   </div>
   <div class="dataset-section" ng-if="dsinfo.children && dsinfo.children.length && dsinfo.children[0].dataset_title">
