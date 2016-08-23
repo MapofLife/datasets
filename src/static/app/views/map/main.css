@@ -52,3 +52,7 @@
   font-size: 10pt;
   text-align: center;
 }
+
+footer {
+  z-index: 1000;
+}
