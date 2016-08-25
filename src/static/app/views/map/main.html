@@ -4,18 +4,25 @@
     layers="map.layers"
     bounds="map.bounds"
     defaults="map.defaults"
-    legend="map.legend"
     controls="map.controls"
     event-broadcast="map.events">
-    <span class="overlay-selectors" ng-if="visibleOverlays().length > 1">
-      <div ng-repeat="overlay in visibleOverlays()">
-        <label ng-class="{selected: map.visible == '{{overlay}}'}">
-          <input type="radio"
-            ng-model="map.visible"
-            ng-value="'{{overlay}}'"
-            ng-change="showOverlay('{{overlay}}')" />
-          {{overlay}}
-        </label>
+    <span class="overlay-selectors" ng-if="visibleOverlays().length > 1 && map.legend[0]">
+      <div class="radios">
+        <div ng-repeat="overlay in visibleOverlays()">
+            <label ng-class="{'selected': map.visible == '{{overlay}}', 'not-selected': map.visible != '{{overlay}}'}">
+              <i class="fa" ng-class="{'fa-dot-circle-o': map.visible == '{{overlay}}', 'fa-circle-o': map.visible != '{{overlay}}'}">
+              </i>
+              <input type="radio"
+                ng-model="map.visible"
+                ng-value="'{{overlay}}'"
+                ng-change="showOverlay('{{overlay}}')" />
+              <span>{{overlay}}</span>
+            </label>
+        </div>
+      </div>
+      <div ng-repeat="item in map.legend">
+        <i class="box" ng-style="{'background': item.color}"></i>
+        <span>{{item.label}}</span>
       </div>
     </span>
   </leaflet>

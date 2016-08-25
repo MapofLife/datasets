@@ -50,6 +50,7 @@
   text-align: center;
   opacity: 0.8;
 }
+
 .map-popup .content {
   padding: 3pt;
   font-size: 10pt;
@@ -60,18 +61,38 @@
   z-index: 1000;
   position: absolute;
   bottom: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
   line-height: 14px;
   padding: 6px 8px 4px 4px;
-  margin: 0 8px 24px 0;
+  margin: 0 0 12px 12px;
 }
 
 .overlay-selectors label {
   font-weight: normal;
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0 0 4px 0;
+}
+
+.overlay-selectors .radios {
+  margin: 0;
+}
+
+.overlay-selectors .radios input[type="radio"] {
+  display: none;
+}
+
+.radios .not-selected {
+  color: #777;
+}
+
+.overlay-selectors .box {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 1px solid black;
 }
 
 footer {

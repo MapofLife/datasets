@@ -13,7 +13,6 @@ molServices.factory(
         extent: leafletBoundsHelpers.createBoundsFromArray([[90, 180], [-90, -180]]),
         controls: { fullscreen: { position: 'topright' }},
         timestamp: Date.now(),
-        // events: { map: { enable: ['zoomstart', 'drag', 'click', 'mousemove'], logic: 'emit' } },
         defaults: { minZoom: 2, scrollWheelZoom: false },
         bounds: {},
         legend: {},
@@ -44,28 +43,27 @@ molServices.factory(
 
         showLegend: function(name) {
           map.legend = map.legends[name];
-          document.styleSheets[0].addRule('.legend:before', 'content: "' + name + '";');
         },
 
         addLegend: function(legendData) {
-          var legend = { position: 'bottomleft', labels: [], colors: [] };
-          legendData.colors.reduce(function(prev, curr, i) {
+          var legend = legendData.colors.reduce(function(prev, curr, i) {
             var item = {
               low: i ? legendData.bins[i-1]+1 : 1,
               high: legendData.bins[i],
-              color: curr
+              color: curr,
+              label: ''
             };
             prev.push(item);
             return prev;
-          }, []).forEach(function(item) {
+          }, []);
+          legend.forEach(function(item) {
             var low = $filter('number')(item.low, 0),
                 high =  $filter('number')(item.high, 0);
             if (item.low == item.high) {
-              legend.labels.push(high);
+              item.label = '' + high;
             } else {
-              legend.labels.push(low + ' - ' + high);
+              item.label = low + ' - ' + high;
             }
-            legend.colors.push(item.color);
           });
           return legend;
         },
