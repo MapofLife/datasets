@@ -7,15 +7,17 @@
     legend="map.legend"
     controls="map.controls"
     event-broadcast="map.events">
+    <span class="overlay-selectors" ng-if="visibleOverlays().length > 1">
+      <div ng-repeat="overlay in visibleOverlays()">
+        <label ng-class="{selected: map.visible == '{{overlay}}'}">
+          <input type="radio"
+            ng-model="map.visible"
+            ng-value="'{{overlay}}'"
+            ng-change="showOverlay('{{overlay}}')" />
+          {{overlay}}
+        </label>
+      </div>
+    </span>
   </leaflet>
-  <span class="btn-group pull-right">
-    <label ng-repeat="overlay in visibleOverlays()"
-        ng-bind="overlay"
-        uib-btn-radio="'{{overlay}}'"
-        ng-change="showOverlay('{{overlay}}')"
-        ng-model="map.visible"
-        class="btn btn-primary btn-xs">
-    </label>
-  </span>
   {{interactivity}}
 </div>
