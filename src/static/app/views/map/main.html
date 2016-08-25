@@ -6,7 +6,7 @@
     defaults="map.defaults"
     controls="map.controls"
     event-broadcast="map.events">
-    <span class="overlay-selectors" ng-if="visibleOverlays().length > 1 && map.legend[0]">
+    <span class="overlay-selectors" ng-if="map.legend[0]">
       <div class="radios">
         <div ng-repeat="overlay in visibleOverlays()">
             <label ng-class="{'selected': map.visible == '{{overlay}}', 'not-selected': map.visible != '{{overlay}}'}">
