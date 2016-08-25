@@ -15,6 +15,7 @@ ul.info-children {
 }
 
 ul.info-children li {
-  margin-bottom: 12px;
-  margin-left: -20px;
+  margin-bottom: 16px;
+  margin-left: -6px;
+  text-indent: -1em;
 }
