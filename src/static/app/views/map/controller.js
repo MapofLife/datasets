@@ -35,7 +35,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
     if ($state.params.dataset) {
       var col = $scope.model.fields.reduce(function(prev, curr, i) { return curr.value == 'dataset_id' ? i : prev; }, -1);
       rows = $scope.model.rows.filter(function(row) {
-        return row[col].some(function(item) { return item.value == $state.params.dataset});
+        return row[col].some(function(item) { return item.value == $state.params.dataset });
       });
     } else {
       rows = $filter('choiceFilter')($scope.model.rows, $scope.model.choices, $scope.model.fields);
