@@ -1,21 +1,31 @@
 <div class="container-fluid datasets-map-container">
-  <leaflet id="datasets-map"
+  <leaflet ng-if="showMap"
     width="100%"
     layers="map.layers"
     bounds="map.bounds"
     defaults="map.defaults"
-    legend="map.legend"
-    controls="map.controls">
+    controls="map.controls"
+    event-broadcast="map.events">
+    <span class="overlay-selectors" ng-if="map.legend[0]">
+      <div class="radios">
+        <div ng-repeat="overlay in visibleOverlays()">
+            <label ng-class="{'selected': map.visible == '{{overlay}}', 'not-selected': map.visible != '{{overlay}}'}">
+              <i class="fa" ng-class="{'fa-dot-circle-o': map.visible == '{{overlay}}', 'fa-circle-o': map.visible != '{{overlay}}'}">
+              </i>
+              <input type="radio"
+                ng-model="map.visible"
+                ng-value="'{{overlay}}'"
+                ng-change="showOverlay('{{overlay}}')" />
+              <span>{{overlay}}</span>
+            </label>
+        </div>
+      </div>
+      <hr />
+      <div ng-repeat="item in map.legend">
+        <i class="box" ng-style="{'background': item.color}"></i>
+        <span>{{item.label}}</span>
+      </div>
+    </span>
   </leaflet>
-  <span class="btn-group pull-right">
-    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Dataset Counts'" ng-change="showOverlay()" ng-show="!$state.params.dataset">
-      Dataset Counts
-    </label>
-    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Species Counts'" ng-change="showOverlay()" ng-show="$state.params.dataset">
-      Species Counts
-    </label>
-    <label class="btn btn-primary btn-xs" ng-model="overlay" uib-btn-radio="'Record Counts'" ng-change="showOverlay()">
-      Record Counts
-    </label>
-  </span>
+  {{interactivity}}
 </div>

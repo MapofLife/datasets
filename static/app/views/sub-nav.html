@@ -1,7 +1,7 @@
 <div class="navigation container-fluid dataset-navigation">
   <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
-      <li ui-sref-options="{inherit:true}" ui-sref-active="active">
+      <li ui-sref-options="{inherit:true}" ui-sref-opts='{reload:true, notify:true}' ui-sref-active="active">
         <a ui-sref="datasets.all.both">All datasets</a>
       </li>
       <li class="display-toggle" ng-show="$state.includes('datasets.info')">
@@ -11,14 +11,14 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.all')">
-            <li><a ui-sref="datasets.all.map">Map Only</a></li>
-            <li><a ui-sref="datasets.all.list">List Only</a></li>
-            <li><a ui-sref="datasets.all.both">Both</a></li>
+            <li><a ui-sref="datasets.all.map" ui-sref-opts='{reload:true}'>Map Only</a></li>
+            <li><a ui-sref="datasets.all.list" ui-sref-opts='{reload:true}'>List Only</a></li>
+            <li><a ui-sref="datasets.all.both" ui-sref-opts='{reload:true}'>Both</a></li>
           </ul>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" ng-show="$state.includes('datasets.info')">
-            <li><a ui-sref="datasets.info.map">Map Only</a></li>
-            <li><a ui-sref="datasets.info.info">Info Only</a></li>
-            <li><a ui-sref="datasets.info.both">Both</a></li>
+            <li><a ui-sref="datasets.info.map" ui-sref-opts='{reload:true}'>Map Only</a></li>
+            <li><a ui-sref="datasets.info.info" ui-sref-opts='{reload:true}'>Info Only</a></li>
+            <li><a ui-sref="datasets.info.both" ui-sref-opts='{reload:true}'>Both</a></li>
           </ul>
         </div>
       </li>
