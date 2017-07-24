@@ -25,6 +25,12 @@ angular.module('mol.datasets', [
   }])
 .config(['$httpProvider', '$locationProvider', '$sceDelegateProvider', '$urlRouterProvider', '$stateProvider',
             function($httpProvider, $locationProvider, $sceDelegateProvider, $urlRouterProvider, $stateProvider) {
+
+  // set some available url params
+  // dt = Data types. E.g. Expert Range Maps (range)
+  // sg = Species groups. E.g. Birds (birds)
+  var params = "dt&sg"; 
+    
   $httpProvider.defaults.useXDomain = true;
   $httpProvider.defaults.withCredentials = false;
   $locationProvider.html5Mode(true);
@@ -65,7 +71,7 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/layouts/content.html'
           }
         },
-        url: '/'
+        url: '/?{0}'.format(params)
       }
     )
     .state(
