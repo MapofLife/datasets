@@ -57,3 +57,78 @@
   .layouts-sidebar mol-loading-indicator {
     top:10px; 
   }
+
+/** start animations **/
+/* start page load animations */
+
+.animate-if.ng-enter,
+.animate-if.ng-leave {
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+/* end page load animations */
+/* start tab animations  */
+/* set reference point */
+
+.tab-animation>.tab-content {
+  position: relative;
+}
+/* set animate effect */
+
+.tab-animation>.tab-content>.tab-pane {
+  transition: 0.2s linear opacity;
+}
+/* overwrite display: none and remove from document flow */
+
+.tab-animation>.tab-content>.tab-pane.active-remove {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: block;
+}
+/* opacity=0 when removing "active" class */
+
+.tab-animation>.tab-content>.tab-pane.active-remove-active {
+  opacity: 0;
+}
+/* opacity=0 when adding "active" class */
+
+.tab-animation>.tab-content>.tab-pane.active-add {
+  opacity: 0;
+}
+/* start data loading */
+
+.loading-remove {
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.loading,
+.loading-add.loading-add-active {
+  opacity: 0.5;
+  /*animation: blinker 0.5s cubic-bezier(.5, 0, 1, 1) infinite alternate;*/
+}
+
+.loading-remove.loading-remove-active {
+  opacity: 1;
+}
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+/* end data loading */
+/* end tab animations  */
+/** end animations **/
