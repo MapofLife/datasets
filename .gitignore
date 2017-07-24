@@ -6,6 +6,7 @@ tmp
 .DS_Store
 *.pyc
 .idea
+.vscode
 config.py
 privatekey.pem
 config_creds.py
