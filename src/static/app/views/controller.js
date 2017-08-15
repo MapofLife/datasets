@@ -32,7 +32,7 @@ angular.module('mol.controllers')
   }, true);
 
   $scope.initialize = function() {
-    molApi({service: 'inventory/datasets', loading: true}).then(function(response) {
+    molApi({service: 'datasets/inventory', loading: true}).then(function(response) {
       $scope.model.fields = response.data.fields;
       $scope.model.rows = response.data.rows;
 

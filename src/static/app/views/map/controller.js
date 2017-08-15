@@ -100,7 +100,7 @@ angular.module('mol.controllers').controller('molDatasetsMapCtrl',
 
   $scope.getLayer = function(payload, name, active) {
     molApi({
-      service: 'inventory/maps',
+      service: 'datasets/maps',
       params : payload,
       canceller: $scope.canceller,
       processing: true

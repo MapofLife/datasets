@@ -3,7 +3,7 @@ var molServices = angular.module('mol.services', []);
 molServices.factory(
   'molConfig', [function() {
     return {
-      api: '0.x'
+      api: '1.x'
     };
   }]
 ).factory('datasetsMap', ['$q', '$rootScope', '$timeout', '$filter', 'leafletData', 'leafletBoundsHelpers', 'leafletMapEvents',
