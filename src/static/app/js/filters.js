@@ -39,4 +39,22 @@ angular.module('mol.datasets')
         });
       });
     };
+  })
+  .filter('dsSearch', function() {
+    return function(rows, term) {
+      if (!term) { return rows; }
+
+      // Filter the rows based upon the search term
+      return rows.filter(function(row) {
+        if (matchesValue(row[2][0].title, term) || matchesValue(row[5][0].value, term)) {
+          return row;
+        }
+      });
+    };
   });
+
+
+function matchesValue(text, pattern) {
+  pattern = pattern.toLowerCase().replace(/[-[\]{}()*+?.,\\^$|#]/g, "\\$&");
+  return (text.toLowerCase().search(pattern) > -1);
+}
