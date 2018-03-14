@@ -1,0 +1,135 @@
+<style>
+  .form-control {
+    max-width: 100%;
+    padding: 6px 12px;
+  }
+  .form-control.region-name {
+    min-width: 300px;
+  }
+  .form-group.submit-btn {
+    margin-top: 26px;
+  }
+
+  .dsbyregions {
+    margin-bottom: 60px;
+  }
+  .dsbyregions thead tr th {
+    white-space: nowrap;
+  }
+
+  .popup-wrapper {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      background-color: #f9f9f9;
+      width: 100%;
+      max-height: 250px;
+      overflow: scroll;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 0 0 5px 5px;      
+    }
+    .popup-wrapper > .message {
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      color: #868686;
+    }
+    .popup-wrapper > .dropdown-menu {
+      position: static;
+      float: none;
+      display: block;
+      min-width: 160px;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+  .typeahead-group-header {
+      border-bottom: 1px solid #ddd;
+      padding: 12px 10px 3px;
+    }
+</style>
+<script type="text/ng-template" id="groupedRegionPopupTemplate.html">
+  <div class="popup-wrapper" ng-style="{top: position().top+'px', left: position().left+'px'}" style="display: block;" ng-show="isOpen() && !moveInProgress"
+    aria-hidden="{{!isOpen()}}">
+    <!-- <p class="message">Select a region</p> -->
+
+    <ul class="dropdown-menu" role="listbox">
+      <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)"
+        ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+        <div class="typeahead-group-header" ng-if="match.model.firstInGroup">{{match.model.attributes.country || ''}}</div>
+        <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+        </li>
+    </ul>
+    </div>
+</script>
+<div class="container">
+  <hr />
+  <div>
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="inRegionType">Region type</label><br />
+        <select class="form-control" id="inRegionType" 
+          ng-options="item.title for item in model.byregion.regionTypes track by item.dataset_id" 
+          ng-model="model.byregion.selectedRegionType">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inRegionName">Region name</label><br />
+        <input type="text" id="inRegionName"
+          placeholder="Select {{ model.byregion.selectedRegionType.type }}"
+          ng-model="model.byregion.selectedRegion"
+          ng-disabled="!model.byregion.currentRegionList"
+          typeahead-on-select="model.byregion.selectedRegion = $item"
+          typeahead-show-hint="true"
+          typeahead-select-on-blur="false"
+          typeahead-min-length="0"
+          typeahead-popup-template-url="groupedRegionPopupTemplate.html"
+          uib-typeahead="region.name for region in model.byregion.currentRegionList | filter:{name:$viewValue}" class="form-control region-name" />
+      </div>
+      <div class="form-group submit-btn">
+        <button type="submit" class="btn btn-default" ng-disabled="!model.byregion.selectedRegion" ng-click="getRegionDatasets()">Search</button>
+        <span ng-show="model.byregion.loading">
+            <i class="fa fa-circle-o-notch fa-spin fa-lg fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </span>
+      </div>
+    </form>
+  </div>
+  <hr />
+
+  <table class="dsbyregions table table-hover table-responsive" ng-show="model.byregion.currentDatasetList">
+    <thead>
+      <tr>
+        <th ng-click="model.byregion.sortType = 'product_type'; model.byregion.sortReverse = !model.byregion.sortReverse">
+          <span>Data type</span>
+          <i class="fa fa-sort" aria-hidden="true" ng-show="model.byregion.sortType != 'product_type'"></i>
+          <i class="fa" ng-class="{'fa-sort-asc': model.byregion.sortType == 'product_type' && !model.byregion.sortReverse, 'fa-sort-desc':model.byregion.sortType == 'product_type' && model.byregion.sortReverse}"
+            aria-hidden="true" ng-show="model.byregion.sortType == 'product_type'"></i>
+        </th>
+        <th ng-click="model.byregion.sortType = 'taxa'; model.byregion.sortReverse = !model.byregion.sortReverse">
+            <span>Taxonomic group</span>
+            <i class="fa fa-sort" aria-hidden="true" ng-show="model.byregion.sortType != 'taxa'"></i>
+            <i class="fa" ng-class="{'fa-sort-asc': model.byregion.sortType == 'taxa' && !model.byregion.sortReverse, 'fa-sort-desc':model.byregion.sortType == 'taxa' && model.byregion.sortReverse}"
+              aria-hidden="true" ng-show="model.byregion.sortType == 'taxa'"></i>
+        </th>
+        <th ng-click="model.byregion.sortType = 'dataset_title'; model.byregion.sortReverse = !model.byregion.sortReverse">
+            <span>Dataset</span>
+            <i class="fa fa-sort" aria-hidden="true" ng-show="model.byregion.sortType != 'dataset_title'"></i>
+            <i class="fa" ng-class="{'fa-sort-asc': model.byregion.sortType == 'dataset_title' && !model.byregion.sortReverse, 'fa-sort-desc':model.byregion.sortType == 'dataset_title' && model.byregion.sortReverse}"
+              aria-hidden="true" ng-show="model.byregion.sortType == 'dataset_title'"></i>
+          </th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ui-sref="datasets.info.both({dataset: row.dataset_id})" ui-sref-options="{reload:true}" class="clickable"
+        ng-repeat="row in model.byregion.currentDatasetList | dsSearch:term | orderBy:model.byregion.sortType:model.byregion.sortReverse">
+        <td><div>{{ getProductType(row.product_type) }}</div></td>
+        <td><div>{{ row.taxa | capitalize }}</div></td>
+        <td><div>{{ row.dataset_title }}</div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

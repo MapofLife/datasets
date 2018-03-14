@@ -7,7 +7,49 @@ angular.module('mol.controllers')
       choices: {},
       fields: [],
       rows: [],
+      byregion: {
+        regionTypes: [{
+          'title': 'Political boundaries',
+          'type': 'countries',
+          'dataset_id': 'e9707baa-46e2-4ec4-99b6-86b1712e02de'
+        }, {
+          'title': 'Mountain Ranges',
+          'type': 'mountains',
+          'dataset_id': 'b7cc3596-5fce-4546-b583-b482520fc01f'
+        }],
+        productTypes: [{
+          'title': 'Expert Range Maps',
+          'type': 'range'
+        }, {
+          'title': 'Regional Checklists',
+          'type': 'regionalchecklist'
+        }, {
+          'title': 'Local inventories',
+          'type': 'localinv'
+        }, {
+          'title': 'Gridded surveys',
+          'type': 'griddedrangeatlas'
+        }, {
+          'title': 'Point observations',
+          'type': 'points'
+        }],
+        currentRegionList: undefined,
+        currentDatasetList: undefined,
+        selectedRegionType: undefined,
+        selectedProductType: [
+          'griddedrangeatlas', 
+          'localinv', 
+          'points',
+          'range', 
+          'regionalchecklist'
+        ],
+        selectedRegion: undefined,
+        sortType: 'dataset_title',
+        sortReverse: false,
+        loading: false
+      }
   };
+  $scope.model.byregion.selectedRegionType = $scope.model.byregion.regionTypes[0];
 
   // Add facets to the state
   $scope.$watch('model.choices', function (n, o) { 
@@ -28,6 +70,20 @@ angular.module('mol.controllers')
         dt: dtlist.join(','),
         sg: sglist.join(',')
       });
+    }
+  }, true);
+
+  // Check for region type change
+  $scope.$watch('model.byregion.selectedRegionType', function (n, o) { 
+    if (n && n != o) {
+      loadRegionsForType();
+    }
+  }, true);
+
+  // Check for region change
+  $scope.$watch('model.byregion.selectedRegion', function (n, o) { 
+    if (n && n != o) {
+      $scope.model.byregion.currentDatasetList = undefined;
     }
   }, true);
 
@@ -53,6 +109,8 @@ angular.module('mol.controllers')
         });
       }
     });
+
+    loadRegionsForType();
   };
 
   $scope.getValue = function(row, columnName) {
@@ -88,10 +146,50 @@ angular.module('mol.controllers')
     return row[$scope.sortColumn].map(function(v) { return v.title; }).join(' ');
   };
 
+  $scope.getProductType = function(value) {
+    return $scope.model.byregion.productTypes.find(function(v){return v.type === value }).title;
+  };
+
+  $scope.getRegionDatasets = function() {
+    $scope.model.byregion.loading = true;
+    var rdurl = 'spatial/regions/datasets?region_id=' + $scope.model.byregion.selectedRegion.region_id;
+    rdurl += '&product_type=' + $scope.model.byregion.selectedProductType.join();
+    molApi({service: rdurl, loading: true}).then(function(response) { 
+      $scope.model.byregion.currentDatasetList = response.data;
+      $scope.model.byregion.loading = false;
+    });
+  };
+
   function getAsArray(obj) {
     if (angular.isString(obj)) return obj.split(',');
     if (angular.isArray(obj)) return obj;
     return undefined;
+  }
+
+  function loadRegionsForType() {
+    $scope.model.byregion.loading = true;
+    $scope.model.byregion.currentRegionList = undefined;
+    $scope.model.byregion.selectedRegion = undefined;
+    $scope.model.byregion.currentDatasetList = undefined;
+    var rturl = 'spatial/regions/list?dataset_id=' + $scope.model.byregion.selectedRegionType.dataset_id;
+    molApi({service: rturl, loading: true}).then(function(response) {
+
+      if ($scope.model.byregion.selectedRegionType.type == 'countries') {
+        var result = _(response.data).filter({ download: true })
+          .sortBy('attributes.country').groupBy(function (g) {
+            if (g.attributes && g.attributes.country) {
+              return g.attributes.country || 'Countries';
+            }
+            return 'Countries';
+          }).map(function (g) { g[0].firstInGroup = true; return g; })
+          .flatten().value();
+        
+        $scope.model.byregion.currentRegionList = result;
+      } else {
+        $scope.model.byregion.currentRegionList = response.data;
+      }
+      $scope.model.byregion.loading = false;
+    });
   }
 
   $scope.initialize();

@@ -57,6 +57,17 @@ angular.module('mol.datasets', [
       }
     )
     .state(
+      'datasets.regions', {
+        title: 'Datasets by region',
+        views: {
+          '': {
+            templateUrl: 'static/app/views/regions.html'
+          }
+        },
+        url: '/regions'
+      }
+    )
+    .state(
       'datasets.all', {
         abstract: true,
         title: 'Datasets Info',
