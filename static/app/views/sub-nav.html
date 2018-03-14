@@ -4,7 +4,7 @@
       <li ui-sref-options="{inherit:true}" ui-sref-opts='{reload:true, notify:true}' ui-sref-active="active">
         <a ui-sref="datasets.all.both">All datasets</a>
       </li>
-      <li class="display-toggle" ng-show="$state.includes('datasets.info')">
+      <!-- <li class="display-toggle" ng-show="$state.includes('datasets.info')">
         <div class="btn-group" uib-dropdown is-open="status.isopen">
           <button type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
             View Mode
@@ -21,6 +21,9 @@
             <li><a ui-sref="datasets.info.both" ui-sref-opts='{reload:true}'>Both</a></li>
           </ul>
         </div>
+      </li> -->
+      <li ui-sref-options="{inherit:true}" ui-sref-opts='{reload:true, notify:true}' ui-sref-active="active">
+        <a ui-sref="datasets.regions">By region</a>
       </li>
     </ul>
   </nav>
