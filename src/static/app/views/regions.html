@@ -67,7 +67,7 @@
 </script>
 <div class="container">
   <hr />
-  <div>
+  <div ng-show="!($state.params.embed && $state.params.regionid)">
     <form class="form-inline">
       <div class="form-group">
         <label for="inRegionType">Region type</label><br />
@@ -97,8 +97,8 @@
         </span>
       </div>
     </form>
+    <hr />
   </div>
-  <hr />
 
   <div ng-show="model.byregion.currentDatasetList">
     <form class="form-horizontal"><div class="form-group">

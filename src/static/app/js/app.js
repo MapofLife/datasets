@@ -32,7 +32,9 @@ angular.module('mol.datasets', [
   // regiontype = Region types. E.g. mountains
   // region = Region name. E.g. Alps
   // regionid = Region ID. E.g. f105d536-8347-4b8e-bec4-627d20a53efa
-  var params = "dt&sg&regiontype&region&regionid"; 
+  var params = "embed&sidebar&header&subnav&footer" + // ui mode options
+  "&regiontype&region&regionid" + // selected dataset region options
+  "&dt&sg"; // selected dataset options
     
   $httpProvider.defaults.useXDomain = true;
   $httpProvider.defaults.withCredentials = false;
