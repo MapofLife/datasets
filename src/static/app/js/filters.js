@@ -46,8 +46,16 @@ angular.module('mol.datasets')
 
       // Filter the rows based upon the search term
       return rows.filter(function(row) {
-        if (matchesValue(row[2][0].title, term) || matchesValue(row[5][0].value, term)) {
-          return row;
+        if (row[2] != undefined) {
+          // Filter for case 1: All datasets
+          if (matchesValue(row[2][0].title, term) || matchesValue(row[5][0].value, term)) {
+              return row;
+          }
+        } else {
+          // Filter for case 2: Datasets by region
+          if (matchesValue(row.dataset_title, term) || matchesValue(row.citation, term)) {
+            return row;
+          }
         }
       });
     };
