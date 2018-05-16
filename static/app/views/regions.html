@@ -67,18 +67,18 @@
 </script>
 <div class="container">
   <hr />
-  <div>
+  <div ng-show="!($state.params.embed && $state.params.regionid)">
     <form class="form-inline">
       <div class="form-group">
-        <label for="exampleInputEmail3">Region type</label><br />
-        <select class="form-control" 
+        <label for="inRegionType">Region type</label><br />
+        <select class="form-control" id="inRegionType" 
           ng-options="item.title for item in model.byregion.regionTypes track by item.dataset_id" 
           ng-model="model.byregion.selectedRegionType">
         </select>
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail3">Region name</label><br />
-        <input type="text"
+        <label for="inRegionName">Region name</label><br />
+        <input type="text" id="inRegionName"
           placeholder="Select {{ model.byregion.selectedRegionType.type }}"
           ng-model="model.byregion.selectedRegion"
           ng-disabled="!model.byregion.currentRegionList"
@@ -97,8 +97,16 @@
         </span>
       </div>
     </form>
+    <hr />
   </div>
-  <hr />
+
+  <div ng-show="model.byregion.currentDatasetList">
+    <form class="form-horizontal"><div class="form-group">
+      <label for="sterm" class="col-sm-2 control-label">Filter datasets</label><div class="col-sm-10">
+      <input type="text" class="form-control" id="sterm" placeholder="Filter datasets via title and authors" style="max-width: 300px" ng-model="term">
+    </div></div></form>
+    <hr />
+  </div>
 
   <table class="dsbyregions table table-hover table-responsive" ng-show="model.byregion.currentDatasetList">
     <thead>
