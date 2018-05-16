@@ -29,7 +29,10 @@ angular.module('mol.datasets', [
   // set some available url params
   // dt = Data types. E.g. Expert Range Maps (range)
   // sg = Species groups. E.g. Birds (birds)
-  var params = "dt&sg"; 
+  // regiontype = Region types. E.g. mountains
+  // region = Region name. E.g. Alps
+  // regionid = Region ID. E.g. f105d536-8347-4b8e-bec4-627d20a53efa
+  var params = "dt&sg&regiontype&region&regionid"; 
     
   $httpProvider.defaults.useXDomain = true;
   $httpProvider.defaults.withCredentials = false;
@@ -64,7 +67,7 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/views/regions.html'
           }
         },
-        url: '/regions'
+        url: '/regions?{0}'.format(params)
       }
     )
     .state(

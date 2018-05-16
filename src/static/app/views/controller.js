@@ -110,6 +110,16 @@ angular.module('mol.controllers')
       }
     });
 
+    var defRegionType = ($state.params.regiontype || $scope.model.byregion.regionTypes[0].type);
+    $scope.model.byregion.selectedRegionType = $scope.model.byregion.regionTypes.find(function(rt) {
+      return rt.type.toLowerCase() === defRegionType.toLowerCase();
+    });
+
+    if ($state.params.regionid) {
+      $scope.model.byregion.selectedRegion = {region_id: $state.params.regionid};
+      $scope.getRegionDatasets();
+    }
+
     loadRegionsForType();
   };
 
@@ -188,6 +198,13 @@ angular.module('mol.controllers')
       } else {
         $scope.model.byregion.currentRegionList = response.data;
       }
+
+      if ($state.params.region) {
+        $scope.model.byregion.selectedRegion = $scope.model.byregion.currentRegionList.find(function(reg) {
+          return reg.name.toLowerCase() === $state.params.region.toLowerCase();
+        });
+      }
+
       $scope.model.byregion.loading = false;
     });
   }
