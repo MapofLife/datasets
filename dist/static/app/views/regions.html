@@ -101,6 +101,8 @@
   </div>
 
   <div ng-show="model.byregion.currentDatasetList">
+    <h4>List of datasets with some overlap with {{ model.byregion.selectedRegion.name }}</h4>
+    <hr />
     <form class="form-horizontal"><div class="form-group">
       <label for="sterm" class="col-sm-2 control-label">Filter datasets</label><div class="col-sm-10">
       <input type="text" class="form-control" id="sterm" placeholder="Filter datasets via title and authors" style="max-width: 300px" ng-model="term">
@@ -132,7 +134,7 @@
         </tr>
     </thead>
     <tbody>
-      <tr ui-sref="datasets.info.both({dataset: row.dataset_id})" ui-sref-options="{reload:true}" class="clickable"
+      <tr ui-sref="datasets.info.both({dataset: row.dataset_id, embed: $state.params.embed})" ui-sref-options="{reload:true}" class="clickable"
         ng-repeat="row in model.byregion.currentDatasetList | dsSearch:term | orderBy:model.byregion.sortType:model.byregion.sortReverse">
         <td><div>{{ getProductType(row.product_type) }}</div></td>
         <td><div>{{ row.taxa | capitalize }}</div></td>
