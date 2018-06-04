@@ -98,7 +98,7 @@ angular.module('mol.datasets', [
             controller: 'molDatasetsMapCtrl'
           }
         },
-        url: 'map'
+        url: 'map?{0}'.format(params)
       }
     )
     .state(
@@ -108,7 +108,7 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/views/table/main.html'
           }
         },
-        url: 'list'
+        url: 'list?{0}'.format(params)
       }
     )
     .state(
@@ -122,7 +122,7 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/views/table/main.html'
           }
         },
-        url: ''
+        url: '?{0}'.format(params)
       }
     )
     .state(
@@ -137,7 +137,7 @@ angular.module('mol.datasets', [
             templateUrl: 'static/app/layouts/content.html'
           },
         },
-        url: '/:dataset'
+        url: '/:dataset?{0}'.format(params)
       }
     )
     .state(
@@ -152,7 +152,7 @@ angular.module('mol.datasets', [
             controller: 'molDatasetsMapCtrl'
           },
         },
-        url: '/map'
+        url: '/map?{0}'.format(params)
       }
     )
     .state(
@@ -167,7 +167,7 @@ angular.module('mol.datasets', [
             controller: 'molDatasetsInfoCtrl'
           }
         },
-        url: '/info'
+        url: '/info?{0}'.format(params)
       }
     )
     .state(
@@ -186,7 +186,7 @@ angular.module('mol.datasets', [
             controller: 'molDatasetsInfoCtrl'
           }
         },
-        url: ''
+        url: '?{0}'.format(params)
       }
     );
     $locationProvider.html5Mode(true);

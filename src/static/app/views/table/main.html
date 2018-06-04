@@ -24,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ui-sref="datasets.info.both({dataset: getValue(row, 'dataset_id')})" ui-sref-options="{reload:true}" class="clickable"
+      <tr ui-sref="datasets.info.both({dataset: getValue(row, 'dataset_id'), embed: $state.params.embed})" ui-sref-options="{reload:true}" class="clickable"
         ng-repeat="row in model.rows | choiceFilter:model.choices:model.fields | dsSearch:term | orderBy:columnValue:reverse:sortComparator">
         <td ng-repeat="cell in row track by $index" ng-if="model.fields[$index].display">
           <div ng-if="model.fields[$index].type == 'number'">
