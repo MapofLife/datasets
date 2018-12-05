@@ -66,6 +66,22 @@ angular.module('mol.datasets')
         return input.substring(0,1).toUpperCase()+input.substring(1);
       } else { return null}
     }
+  }).filter('doiText', function() {
+    return function(input) {
+      if (input) {
+        return input.replace('http://doi.org/', '').replace('https://doi.org/', '');
+      } 
+      return input;
+    }
+  }).filter('doiLink', function() {
+    return function(input) {
+      if (input) {
+        if (input.indexOf('http') == -1) {
+          return 'https://doi.org/' + input.replace('doi:', '').replace('DOI:', '');
+        }
+      } 
+      return input;
+    }
   });
 
 

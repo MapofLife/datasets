@@ -3,9 +3,13 @@
     <hr class="featurette-divider" />
     <h3>{{ md.section }}</h3>
     <div class="info-item" ng-repeat="mdc in md.children">
-      <p>
+      <p ng-if="mdc.id.indexOf('doi') == -1">
         <strong>{{ mdc.label }}:</strong>
         <span ng-bind-html="mdc.value | linky:'_blank'"></span>
+      </p>
+      <p ng-if="mdc.id.indexOf('doi') > -1">
+        <strong>{{ mdc.label }}:</strong>
+        <span><a href="{{ mdc.value | doiLink }}" target="_blank">{{ mdc.value | doiText }}</a></span>
       </p>
     </div>
   </div>
