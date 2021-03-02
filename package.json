@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.1",
   "description": "Map of Life Dataset Inventory",
-  "repository": "git@github.com:MapofLife/datasets.git",
-  "url": "https://mapoflife.github.io/datasets/",
-  "base": "datasets",
+  "repository": "git@github.com:MapofLife/datasets-classic.git",
+  "url": "https://mapoflife.github.io/datasets-classic/",
+  "base": "datasets-classic",
   "license": "MIT",
   "directory": "static/components/",
   "devDependencies": {
